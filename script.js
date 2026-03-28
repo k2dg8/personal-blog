@@ -1,50 +1,47 @@
+// 1. Blog Posts Data
 const posts = [
     {
         title: "Hello, World. Welcome to Magmatum.",
         date: "March 28, 2026",
-        content: "I'm Khalid, a CS student and Backend Developer. Magmatum is where I document my journey from low-level Assembly to high-level Backend architecture and Cybersecurity. Stay tuned for more!"
+        content: "I'm Khalid, a CS student and Backend Developer. Magmatum is where I document my journey from low-level Assembly to high-level architecture. Stay tuned!"
     },
     {
-        title: "My First Blog Post",
+        title: "The Architecture of a One-Page Blog",
         date: "March 27, 2026",
-        content: "Today I started my journey into web development. GitHub Pages makes it so easy to share my work with the world!"
+        content: "Building with HTML, CSS, and JS is the foundation of everything I do. It's the 'Magma' of the web development world."
     }
 ];
 
+// 2. Render Posts
 const container = document.getElementById('blog-container');
-
-// This part stays the same—it handles the "magic" of showing the posts
 posts.forEach(post => {
-    const postElement = document.createElement('article');
-    postElement.classList.add('post');
-
-    postElement.innerHTML = `
-        <h2>${post.title}</h2>
-        <p class="post-date">${post.date}</p>
-        <p>${post.content}</p>
-    `;
-
-    container.appendChild(postElement);
-
-    const modal = document.getElementById("contactModal");
-const btn = document.getElementById("openModal");
-const span = document.querySelector(".close-btn");
-
-// Open the modal when the button is clicked
-btn.onclick = function() {
-  modal.style.display = "block";
-}
-
-// Close the modal when the "X" is clicked
-span.onclick = function() {
-  modal.style.display = "none";
-}
-
-// Close the modal if the user clicks anywhere outside of the white box
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
-
+    const article = document.createElement('article');
+    article.className = 'post';
+    article.innerHTML = `<h2>${post.title}</h2><p style="color:#888">${post.date}</p><p>${post.content}</p>`;
+    container.appendChild(article);
 });
+
+// 3. Burger Menu Logic
+const burger = document.getElementById('burger');
+const navLinks = document.getElementById('navLinks');
+
+burger.onclick = () => {
+    navLinks.classList.toggle('nav-active');
+};
+
+// 4. Modal Popup Logic
+const modal = document.getElementById("contactModal");
+const contactBtn = document.getElementById("contactLink");
+const closeBtn = document.querySelector(".close-btn");
+
+contactBtn.onclick = (e) => {
+    e.preventDefault(); // Stop link from jumping
+    modal.style.display = "block";
+    navLinks.classList.remove('nav-active'); // Close mobile menu if open
+}
+
+closeBtn.onclick = () => modal.style.display = "none";
+
+window.onclick = (event) => {
+    if (event.target == modal) modal.style.display = "none";
+}
