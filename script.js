@@ -25,4 +25,26 @@ posts.forEach(post => {
     `;
 
     container.appendChild(postElement);
+
+    const modal = document.getElementById("contactModal");
+const btn = document.getElementById("openModal");
+const span = document.querySelector(".close-btn");
+
+// Open the modal when the button is clicked
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// Close the modal when the "X" is clicked
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// Close the modal if the user clicks anywhere outside of the white box
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
 });
