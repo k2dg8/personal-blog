@@ -8,57 +8,51 @@ const firebaseConfig = {
   measurementId: "G-WB2F1VRLM6"
 };
 
-// Initialize Firebase
-if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig);
-}
+if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
 const auth = firebase.auth();
+const db = firebase.firestore();
 
-// --- SIGN UP LOGIC ---
+// --- AUTH LOGIC (Login/Signup/Logout) ---
 const signupForm = document.getElementById('signupForm');
 if (signupForm) {
     signupForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        const email = document.getElementById('signupEmail').value;
-        const password = document.getElementById('signupPassword').value;
-
-        auth.createUserWithEmailAndPassword(email, password)
-            .then(() => window.location.href = "dashboard.html")
-            .catch((error) => alert(error.message));
+        auth.createUserWithEmailAndPassword(document.getElementById('signupEmail').value, document.getElementById('signupPassword').value)
+            .then(() => window.location.href = "dashboard.html").catch(err => alert(err.message));
     });
 }
 
-// --- LOGIN LOGIC ---
 const loginForm = document.getElementById('loginForm');
 if (loginForm) {
     loginForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        const email = document.getElementById('loginEmail').value;
-        const password = document.getElementById('loginPassword').value;
-
-        auth.signInWithEmailAndPassword(email, password)
-            .then(() => window.location.href = "dashboard.html")
-            .catch((error) => alert(error.message));
+        auth.signInWithEmailAndPassword(document.getElementById('loginEmail').value, document.getElementById('loginPassword').value)
+            .then(() => window.location.href = "dashboard.html").catch(err => alert(err.message));
     });
 }
 
-// --- AUTH OBSERVER (The Guard) ---
 auth.onAuthStateChanged((user) => {
     const userEmailSpan = document.getElementById('userEmail');
-    if (user) {
-        if (userEmailSpan) userEmailSpan.innerText = user.email;
-    } else {
-        // Protect the Dashboard
-        if (window.location.pathname.includes("dashboard.html")) {
-            window.location.href = "login.html";
-        }
-    }
+    if (user) { if (userEmailSpan) userEmailSpan.innerText = user.email; } 
+    else { if (window.location.pathname.includes("dashboard.html")) window.location.href = "login.html"; }
 });
 
-// --- LOGOUT ---
 const logoutBtn = document.getElementById('logoutBtn');
-if (logoutBtn) {
-    logoutBtn.onclick = () => {
-        auth.signOut().then(() => window.location.href = "index.html");
-    };
+if (logoutBtn) { logoutBtn.onclick = () => auth.signOut().then(() => window.location.href = "index.html"); }
+
+// --- FIRESTORE LOGIC (Publishing Posts) ---
+const postForm = document.getElementById('postForm');
+if (postForm) {
+    postForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        db.collection("posts").add({
+            title: document.getElementById('postTitle').value,
+            content: document.getElementById('postContent').value,
+            date: new Date().toLocaleDateString(),
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        }).then(() => {
+            alert("Post Published!");
+            postForm.reset();
+        }).catch(err => alert(err.message));
+    });
 }
