@@ -23,13 +23,8 @@ if (signupForm) {
         const password = document.getElementById('signupPassword').value;
 
         auth.createUserWithEmailAndPassword(email, password)
-            .then((userCredential) => {
-                console.log("User Created:", userCredential.user.email);
-                window.location.href = "dashboard.html";
-            })
-            .catch((error) => {
-                alert("Error: " + error.message);
-            });
+            .then(() => window.location.href = "dashboard.html")
+            .catch((error) => alert(error.message));
     });
 }
 
@@ -42,12 +37,28 @@ if (loginForm) {
         const password = document.getElementById('loginPassword').value;
 
         auth.signInWithEmailAndPassword(email, password)
-            .then((userCredential) => {
-                console.log("Login Success!");
-                window.location.href = "dashboard.html";
-            })
-            .catch((error) => {
-                alert("Error: " + error.message);
-            });
+            .then(() => window.location.href = "dashboard.html")
+            .catch((error) => alert(error.message));
     });
+}
+
+// --- AUTH OBSERVER (The Guard) ---
+auth.onAuthStateChanged((user) => {
+    const userEmailSpan = document.getElementById('userEmail');
+    if (user) {
+        if (userEmailSpan) userEmailSpan.innerText = user.email;
+    } else {
+        // Protect the Dashboard
+        if (window.location.pathname.includes("dashboard.html")) {
+            window.location.href = "login.html";
+        }
+    }
+});
+
+// --- LOGOUT ---
+const logoutBtn = document.getElementById('logoutBtn');
+if (logoutBtn) {
+    logoutBtn.onclick = () => {
+        auth.signOut().then(() => window.location.href = "index.html");
+    };
 }

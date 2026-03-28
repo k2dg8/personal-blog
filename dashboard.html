@@ -4,21 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | Magmatum</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
     <nav class="navbar">
         <div class="logo">Magmatum Admin</div>
-        <button id="logoutBtn" class="auth-btn" style="width:auto; padding:5px 15px;">Logout</button>
+        <button id="logoutBtn" class="auth-btn" style="width:auto; padding:5px 15px; margin:0;">Logout</button>
     </nav>
 
-    <div class="auth-container" style="margin: 50px auto;">
-        <h1>Welcome, <span id="userEmail">Admin</span>!</h1>
-        <p>Status: <span style="color:green">Authenticated</span></p>
+    <div class="auth-container" style="margin: 50px auto; max-width: 500px;">
+        <h1>Welcome, <span id="userEmail">Admin</span></h1>
+        <p>You have successfully logged into the backend of Magmatum.</p>
     </div>
 
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
-    <script src="auth.js"></script>
+    <script src="./auth.js"></script>
 </body>
 </html>
