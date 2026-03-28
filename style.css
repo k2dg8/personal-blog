@@ -58,3 +58,48 @@ body {
     .burger { display: block; }
     .nav-active { transform: translateX(0%); }
 }
+
+/* Auth Pages Styling */
+.auth-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #1a1a1a; /* Darker theme for auth */
+}
+
+.auth-container {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.auth-container input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-sizing: border-box; /* Important for width */
+}
+
+.auth-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #222;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.auth-btn:hover {
+    background-color: #00d4ff;
+    transition: 0.3s;
+}
