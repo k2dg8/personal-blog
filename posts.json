@@ -1,0 +1,59 @@
+[
+  {
+    "id": 1,
+    "title": "First Blog Post",
+    "content": "Welcome to my blog! This is my first post where I share my thoughts and experiences. I'm excited to share my journey in web development and technology.",
+    "category": "Personal",
+    "tags": ["introduction", "web-development", "personal"],
+    "author": {
+      "id": 1,
+      "username": "admin",
+      "fullName": "Administrator"
+    },
+    "date": "2024-01-15T10:00:00.000Z",
+    "lastModified": "2024-01-15T10:00:00.000Z",
+    "likes": 0,
+    "likedBy": [],
+    "views": 15,
+    "commentsCount": 0,
+    "featured": true
+  },
+  {
+    "id": 2,
+    "title": "My Journey Begins",
+    "content": "Starting this blog has been an exciting experience. I look forward to sharing more content soon about programming, design, and the latest in technology trends.",
+    "category": "Personal",
+    "tags": ["journey", "blogging", "technology"],
+    "author": {
+      "id": 1,
+      "username": "admin",
+      "fullName": "Administrator"
+    },
+    "date": "2024-01-10T14:30:00.000Z",
+    "lastModified": "2024-01-10T14:30:00.000Z",
+    "likes": 0,
+    "likedBy": [],
+    "views": 8,
+    "commentsCount": 0,
+    "featured": false
+  },
+  {
+    "id": 3,
+    "title": "Understanding Modern Web Development",
+    "content": "Modern web development has evolved significantly. From simple HTML pages to complex single-page applications, the landscape continues to change rapidly. Let's explore the current state of web technologies.",
+    "category": "Technology",
+    "tags": ["web-development", "javascript", "frontend", "backend"],
+    "author": {
+      "id": 1,
+      "username": "admin",
+      "fullName": "Administrator"
+    },
+    "date": "2024-01-20T09:15:00.000Z",
+    "lastModified": "2024-01-20T09:15:00.000Z",
+    "likes": 0,
+    "likedBy": [],
+    "views": 23,
+    "commentsCount": 0,
+    "featured": true
+  }
+]

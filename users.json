@@ -1,0 +1,19 @@
+[
+  {
+    "id": 1,
+    "username": "admin",
+    "email": "admin@example.com",
+    "password": "$2b$10$hDGG0kl6IFzleI22bjJfb.wzTEqMBQWN.G0xS33a.DWi7Df99UvJO",
+    "fullName": "Administrator",
+    "role": "admin",
+    "createdAt": "2024-01-01T00:00:00.000Z",
+    "avatar": null,
+    "bio": "Blog administrator and content creator. Passionate about web development and technology.",
+    "stats": {
+      "postsCount": 3,
+      "commentsCount": 0,
+      "likesReceived": 0,
+      "joinDate": "January 1, 2024"
+    }
+  }
+]
