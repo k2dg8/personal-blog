@@ -1,105 +1,25 @@
-/* General Styles */
-body {
-    font-family: 'Segoe UI', sans-serif;
-    line-height: 1.6;
-    margin: 0;
-    background-color: #f4f4f4;
-}
+body { font-family: sans-serif; margin: 0; background: #f4f4f4; }
+.navbar { display: flex; justify-content: space-between; padding: 1rem 10%; background: #222; color: #fff; align-items: center; }
+.nav-links { display: flex; list-style: none; }
+.nav-links li a { color: white; text-decoration: none; margin-left: 20px; }
 
-/* Navbar */
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #222;
-    padding: 1rem 10%;
-    color: white;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-.nav-links {
-    display: flex;
-    list-style: none;
-    margin: 0;
-}
-
-.nav-links li a {
-    color: white;
-    text-decoration: none;
-    margin-left: 25px;
-    transition: color 0.3s;
-}
-
-.nav-links li a:hover { color: #00d4ff; }
+/* Auth Styling */
+.auth-page { display: flex; justify-content: center; align-items: center; height: 100vh; background: #1a1a1a; }
+.auth-container { background: white; padding: 30px; border-radius: 8px; width: 300px; text-align: center; }
+.auth-container input { width: 100%; padding: 10px; margin: 10px 0; box-sizing: border-box; }
+.auth-btn { width: 100%; padding: 10px; background: #333; color: white; border: none; cursor: pointer; }
+.auth-btn:hover { background: #00d4ff; }
 
 /* Burger Menu */
 .burger { display: none; cursor: pointer; }
-.burger div { width: 25px; height: 3px; background-color: white; margin: 5px; }
+.burger div { width: 25px; height: 3px; background: white; margin: 5px; }
 
-/* Blog Content */
-.hero { text-align: center; padding: 60px 20px; background: #fff; border-bottom: 1px solid #ddd; }
-#blog-container { max-width: 800px; margin: 20px auto; padding: 0 20px; }
-.post { background: white; padding: 25px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-
-/* Modal Styles */
-.modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); }
-.modal-content { background: white; margin: 15% auto; padding: 40px; border-radius: 12px; width: 80%; max-width: 400px; text-align: center; position: relative; }
-.close-btn { position: absolute; right: 20px; top: 10px; font-size: 24px; cursor: pointer; }
-
-/* Responsive Mobile View */
 @media screen and (max-width: 768px) {
-    .nav-links {
-        position: absolute; right: 0; top: 60px; height: 100vh; background: #222;
-        flex-direction: column; width: 60%; transform: translateX(100%); transition: 0.4s ease-in;
-    }
-    .nav-links li { margin: 30px 0; text-align: center; }
+    .nav-links { position: absolute; right: 0; top: 8vh; background: #222; flex-direction: column; width: 50%; display: none; }
     .burger { display: block; }
-    .nav-active { transform: translateX(0%); }
+    .nav-active { display: flex; }
 }
 
-/* Auth Pages Styling */
-.auth-page {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #1a1a1a; /* Darker theme for auth */
-}
-
-.auth-container {
-    background: white;
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-    width: 100%;
-    max-width: 400px;
-    text-align: center;
-}
-
-.auth-container input {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    box-sizing: border-box; /* Important for width */
-}
-
-.auth-btn {
-    width: 100%;
-    padding: 12px;
-    background-color: #222;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-top: 10px;
-}
-
-.auth-btn:hover {
-    background-color: #00d4ff;
-    transition: 0.3s;
-}
+/* Modal */
+.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); }
+.modal-content { background: #fff; margin: 20% auto; padding: 20px; width: 300px; position: relative; }
