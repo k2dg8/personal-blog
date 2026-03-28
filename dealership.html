@@ -1,0 +1,1711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Magmatum Motors — Premium Automotive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --gold-dark: #9a7a30;
+    --dark: #0a0a0b;
+    --dark-2: #111113;
+    --dark-3: #18181c;
+    --dark-4: #222228;
+    --dark-5: #2e2e36;
+    --text: #e8e8ec;
+    --text-muted: #888896;
+    --text-dim: #555560;
+    --white: #ffffff;
+    --red: #c0392b;
+    --green: #27ae60;
+    --radius: 4px;
+    --radius-lg: 8px;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--dark);
+    color: var(--text);
+    font-family: 'Barlow', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--dark-2); }
+  ::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 3px; }
+
+  /* TYPOGRAPHY */
+  h1,h2,h3,h4,h5 { font-family: 'Cormorant Garamond', serif; font-weight: 600; }
+  .label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 48px;
+    height: 72px;
+    background: rgba(10,10,11,0.92);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+    transition: all 0.3s;
+  }
+  nav.scrolled { height: 60px; border-bottom-color: rgba(201,168,76,0.25); }
+
+  .nav-logo {
+    display: flex; align-items: center; gap: 12px; text-decoration: none;
+  }
+  .nav-logo-mark {
+    width: 36px; height: 36px;
+    border: 2px solid var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px; font-weight: 700; color: var(--gold);
+    position: relative;
+  }
+  .nav-logo-mark::after {
+    content:''; position: absolute;
+    width: 28px; height: 28px;
+    border: 1px solid rgba(201,168,76,0.3);
+    top: 2px; left: 2px;
+  }
+  .nav-logo-text { font-family: 'Barlow Condensed', sans-serif; font-size: 20px; letter-spacing: 4px; color: var(--white); font-weight: 600; }
+  .nav-logo-sub { font-size: 9px; letter-spacing: 2px; color: var(--gold); font-family: 'Barlow Condensed', sans-serif; text-transform: uppercase; display: block; line-height: 1; }
+
+  .nav-links {
+    display: flex; align-items: center; gap: 36px; list-style: none;
+  }
+  .nav-links a {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--text-muted); text-decoration: none;
+    transition: color 0.2s; font-weight: 400;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-links a.active { color: var(--white); }
+
+  .nav-cta {
+    display: flex; align-items: center; gap: 16px;
+  }
+  .btn-outline {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--gold); border: 1px solid var(--gold);
+    padding: 9px 22px; cursor: pointer; background: transparent;
+    transition: all 0.25s; text-decoration: none;
+  }
+  .btn-outline:hover { background: var(--gold); color: var(--dark); }
+  .btn-gold {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--dark); background: var(--gold);
+    padding: 10px 24px; cursor: pointer; border: none;
+    transition: all 0.25s; text-decoration: none;
+  }
+  .btn-gold:hover { background: var(--gold-light); }
+
+  /* HAMBURGER */
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+  .hamburger span { width: 24px; height: 2px; background: var(--text); transition: all 0.3s; }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* MOBILE NAV */
+  .mobile-nav {
+    display: none; position: fixed; top: 72px; left: 0; right: 0; z-index: 999;
+    background: var(--dark-2); border-bottom: 1px solid var(--gold-dark);
+    padding: 24px 32px; flex-direction: column; gap: 20px;
+  }
+  .mobile-nav.open { display: flex; }
+  .mobile-nav a {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 15px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--text-muted); text-decoration: none; padding: 8px 0;
+    border-bottom: 1px solid var(--dark-4);
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    height: 100vh; min-height: 700px;
+    position: relative; overflow: hidden;
+    display: flex; align-items: center;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 70% 50%, rgba(201,168,76,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 20% 80%, rgba(201,168,76,0.04) 0%, transparent 50%);
+  }
+
+  .hero-grid-lines {
+    position: absolute; inset: 0; pointer-events: none;
+    background-image:
+      linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+    background-size: 80px 80px;
+  }
+
+  .hero-car-silhouette {
+    position: absolute; right: -2%; bottom: 0;
+    width: 65%; opacity: 0.95;
+    animation: carFloat 6s ease-in-out infinite;
+  }
+  @keyframes carFloat {
+    0%,100% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); }
+  }
+
+  .hero-car-glow {
+    position: absolute; right: 10%; bottom: 0;
+    width: 50%; height: 40%;
+    background: radial-gradient(ellipse, rgba(201,168,76,0.12) 0%, transparent 70%);
+    pointer-events: none;
+    animation: carFloat 6s ease-in-out infinite;
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    padding: 0 48px; max-width: 640px;
+    animation: fadeSlideUp 1s ease forwards;
+  }
+  @keyframes fadeSlideUp {
+    from { opacity:0; transform: translateY(30px); }
+    to { opacity:1; transform: translateY(0); }
+  }
+
+  .hero-label { margin-bottom: 20px; }
+  .hero-title {
+    font-size: clamp(48px, 6vw, 80px);
+    font-weight: 600; line-height: 1.05;
+    color: var(--white); margin-bottom: 12px;
+  }
+  .hero-title span { color: var(--gold); }
+  .hero-subtitle {
+    font-size: 16px; color: var(--text-muted); font-weight: 300;
+    line-height: 1.7; margin-bottom: 40px; max-width: 420px;
+  }
+
+  .hero-stats {
+    display: flex; gap: 40px; margin-bottom: 44px;
+  }
+  .hero-stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px; font-weight: 600; color: var(--gold);
+    line-height: 1;
+  }
+  .hero-stat-label {
+    font-size: 11px; letter-spacing: 2px; color: var(--text-dim);
+    text-transform: uppercase; font-family: 'Barlow Condensed', sans-serif;
+    margin-top: 4px;
+  }
+
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+
+  /* SEARCH BAR SECTION */
+  .search-section {
+    background: var(--dark-2);
+    border-top: 1px solid rgba(201,168,76,0.15);
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+    padding: 28px 48px;
+  }
+
+  .search-bar {
+    display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
+    max-width: 1200px; margin: 0 auto;
+  }
+
+  .search-field {
+    flex: 1; min-width: 140px;
+    background: var(--dark-3); border: 1px solid var(--dark-5);
+    color: var(--text); padding: 12px 16px;
+    font-family: 'Barlow', sans-serif; font-size: 13px;
+    outline: none; transition: border-color 0.2s;
+    appearance: none;
+  }
+  .search-field:focus { border-color: var(--gold); }
+  select.search-field option { background: var(--dark-3); }
+
+  .search-btn {
+    background: var(--gold); color: var(--dark);
+    border: none; padding: 12px 32px; cursor: pointer;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px; letter-spacing: 2px; text-transform: uppercase;
+    font-weight: 600; transition: background 0.2s; white-space: nowrap;
+  }
+  .search-btn:hover { background: var(--gold-light); }
+
+  /* SECTION COMMONS */
+  section { padding: 100px 48px; }
+  .section-header { text-align: center; margin-bottom: 64px; }
+  .section-title {
+    font-size: clamp(36px, 4vw, 52px);
+    font-weight: 600; color: var(--white);
+    margin-top: 12px; line-height: 1.1;
+  }
+  .section-subtitle {
+    font-size: 15px; color: var(--text-muted);
+    margin-top: 14px; font-weight: 300; line-height: 1.7;
+    max-width: 500px; margin-left: auto; margin-right: auto;
+  }
+  .gold-line {
+    width: 48px; height: 2px; background: var(--gold);
+    margin: 20px auto 0; opacity: 0.6;
+  }
+
+  /* INVENTORY */
+  #inventory { background: var(--dark); }
+
+  .filter-bar {
+    display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;
+    margin-bottom: 40px;
+  }
+  .filter-pill {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+    padding: 8px 20px; border: 1px solid var(--dark-5);
+    background: transparent; color: var(--text-muted);
+    cursor: pointer; transition: all 0.2s;
+  }
+  .filter-pill:hover, .filter-pill.active {
+    border-color: var(--gold); color: var(--gold); background: rgba(201,168,76,0.06);
+  }
+
+  .inventory-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px; max-width: 1300px; margin: 0 auto;
+  }
+
+  .car-card {
+    background: var(--dark-2);
+    border: 1px solid var(--dark-4);
+    transition: all 0.3s; cursor: pointer;
+    position: relative; overflow: hidden;
+  }
+  .car-card::before {
+    content:''; position: absolute; top:0; left:0; right:0;
+    height: 2px; background: var(--gold);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .car-card:hover { border-color: var(--gold-dark); transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+  .car-card:hover::before { transform: scaleX(1); }
+
+  .car-card-img {
+    width: 100%; height: 210px; object-fit: cover;
+    background: var(--dark-3);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text-dim); font-size: 13px;
+    position: relative; overflow: hidden;
+  }
+  .car-card-img svg { width: 100%; height: 100%; }
+  .car-badge {
+    position: absolute; top: 14px; left: 14px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    padding: 4px 10px; font-weight: 600;
+  }
+  .badge-new { background: var(--gold); color: var(--dark); }
+  .badge-used { background: var(--dark-5); color: var(--text-muted); }
+  .badge-certified { background: #1a3a2a; color: #4dbb7f; border: 1px solid #2d6e45; }
+
+  .car-card-body { padding: 22px 24px 26px; }
+  .car-card-make {
+    font-size: 11px; letter-spacing: 2px; color: var(--gold);
+    text-transform: uppercase; font-family: 'Barlow Condensed', sans-serif;
+    margin-bottom: 4px;
+  }
+  .car-card-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 600; color: var(--white);
+    margin-bottom: 14px; line-height: 1.2;
+  }
+  .car-card-specs {
+    display: flex; gap: 16px; margin-bottom: 16px; flex-wrap: wrap;
+  }
+  .spec { font-size: 12px; color: var(--text-dim); display: flex; align-items: center; gap: 5px; }
+  .spec-icon { color: var(--gold-dark); font-size: 10px; }
+
+  .car-card-divider { border: none; border-top: 1px solid var(--dark-4); margin-bottom: 16px; }
+  .car-card-footer { display: flex; align-items: center; justify-content: space-between; }
+  .car-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px; font-weight: 600; color: var(--gold);
+  }
+  .car-price-mo {
+    font-size: 11px; color: var(--text-dim); margin-top: 2px;
+    font-family: 'Barlow', sans-serif;
+  }
+  .btn-view {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--gold); border: 1px solid rgba(201,168,76,0.4);
+    padding: 8px 16px; background: transparent; cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-view:hover { background: var(--gold); color: var(--dark); }
+
+  .inventory-footer { text-align: center; margin-top: 48px; }
+
+  /* CAR DETAIL MODAL */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 2000;
+    background: rgba(0,0,0,0.85); backdrop-filter: blur(8px);
+    align-items: center; justify-content: center; padding: 24px;
+  }
+  .modal-overlay.open { display: flex; }
+
+  .modal {
+    background: var(--dark-2); border: 1px solid var(--dark-5);
+    width: 100%; max-width: 900px; max-height: 90vh;
+    overflow-y: auto; position: relative;
+    animation: modalIn 0.3s ease;
+  }
+  @keyframes modalIn { from { opacity:0; transform: scale(0.96); } to { opacity:1; transform: scale(1); } }
+
+  .modal-close {
+    position: absolute; top: 20px; right: 20px;
+    width: 36px; height: 36px; background: var(--dark-4);
+    border: none; color: var(--text-muted); cursor: pointer;
+    font-size: 18px; display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s; z-index: 10;
+  }
+  .modal-close:hover { background: var(--gold); color: var(--dark); }
+
+  .modal-img {
+    width: 100%; height: 320px; background: var(--dark-3);
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .modal-img svg { width: 100%; height: 100%; }
+
+  .modal-body { padding: 36px; }
+  .modal-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 28px; flex-wrap: wrap; gap: 16px; }
+  .modal-make { font-size: 11px; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; font-family: 'Barlow Condensed', sans-serif; margin-bottom: 6px; }
+  .modal-title { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 600; color: var(--white); }
+  .modal-price { font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 600; color: var(--gold); }
+  .modal-price-sub { font-size: 12px; color: var(--text-dim); text-align: right; }
+
+  .modal-specs-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 16px; margin-bottom: 32px;
+  }
+  .modal-spec {
+    background: var(--dark-3); padding: 16px;
+    border-left: 2px solid var(--gold-dark);
+  }
+  .modal-spec-label { font-size: 10px; letter-spacing: 2px; color: var(--text-dim); text-transform: uppercase; font-family: 'Barlow Condensed', sans-serif; margin-bottom: 4px; }
+  .modal-spec-value { font-size: 15px; color: var(--white); font-weight: 400; }
+
+  .modal-features { margin-bottom: 32px; }
+  .modal-features h4 { font-family: 'Cormorant Garamond', serif; font-size: 20px; color: var(--white); margin-bottom: 16px; }
+  .features-list { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .feature-item { font-size: 13px; color: var(--text-muted); display: flex; align-items: center; gap: 8px; }
+  .feature-item::before { content:'✓'; color: var(--gold); font-size: 12px; }
+
+  .modal-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  /* FEATURED / BANNER */
+  .featured-banner {
+    position: relative; overflow: hidden;
+    background: var(--dark-3); margin: 0;
+    padding: 0 !important;
+  }
+  .featured-inner {
+    display: flex; min-height: 480px;
+  }
+  .featured-content {
+    width: 50%; padding: 80px 60px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; z-index: 2;
+  }
+  .featured-content::before {
+    content:''; position: absolute; right: -60px; top: 50%; transform: translateY(-50%);
+    width: 120px; height: 120px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,168,76,0.2) 0%, transparent 70%);
+  }
+  .featured-car-side {
+    width: 50%; position: relative;
+    background: linear-gradient(135deg, var(--dark-4) 0%, var(--dark-3) 100%);
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .featured-car-side svg { width: 100%; height: auto; }
+  .featured-glow {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at center, rgba(201,168,76,0.12) 0%, transparent 65%);
+  }
+  .featured-title { font-size: clamp(32px, 3.5vw, 48px); color: var(--white); font-weight: 600; line-height: 1.1; margin-bottom: 16px; }
+  .featured-desc { font-size: 14px; color: var(--text-muted); line-height: 1.8; margin-bottom: 32px; }
+  .featured-price-tag {
+    display: inline-flex; align-items: baseline; gap: 6px; margin-bottom: 32px;
+  }
+  .featured-price-tag .from { font-size: 12px; color: var(--text-dim); letter-spacing: 1px; }
+  .featured-price-tag .amt { font-family: 'Cormorant Garamond', serif; font-size: 42px; font-weight: 600; color: var(--gold); }
+
+  /* FINANCING CALCULATOR */
+  #financing { background: var(--dark-2); }
+  .calc-wrapper {
+    max-width: 900px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
+    align-items: start;
+  }
+  .form-group { margin-bottom: 24px; }
+  .form-label { font-size: 11px; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; font-family: 'Barlow Condensed', sans-serif; margin-bottom: 8px; display: block; }
+  .form-input {
+    width: 100%; background: var(--dark-3); border: 1px solid var(--dark-5);
+    color: var(--text); padding: 12px 16px;
+    font-family: 'Barlow', sans-serif; font-size: 14px;
+    outline: none; transition: border-color 0.2s;
+  }
+  .form-input:focus { border-color: var(--gold); }
+  .range-wrap { position: relative; }
+  input[type="range"] {
+    width: 100%; -webkit-appearance: none; appearance: none;
+    height: 3px; background: var(--dark-5); outline: none; cursor: pointer;
+    border-radius: 2px;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; width: 18px; height: 18px;
+    background: var(--gold); border-radius: 50%;
+    border: 2px solid var(--dark-2);
+  }
+  .range-val {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; color: var(--white);
+    margin-bottom: 10px; display: block;
+  }
+
+  .calc-result {
+    background: var(--dark-3); padding: 40px;
+    border: 1px solid var(--dark-5); position: relative; overflow: hidden;
+  }
+  .calc-result::before {
+    content:''; position: absolute; top: 0; left: 0; right: 0;
+    height: 3px; background: linear-gradient(90deg, var(--gold), transparent);
+  }
+  .monthly-label { font-size: 11px; letter-spacing: 2px; color: var(--text-dim); text-transform: uppercase; font-family: 'Barlow Condensed', sans-serif; margin-bottom: 8px; }
+  .monthly-amt {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 64px; font-weight: 600; color: var(--gold); line-height: 1;
+    margin-bottom: 4px;
+  }
+  .monthly-sub { font-size: 12px; color: var(--text-dim); margin-bottom: 32px; }
+  .calc-breakdown { border-top: 1px solid var(--dark-4); padding-top: 24px; }
+  .breakdown-row { display: flex; justify-content: space-between; padding: 8px 0; font-size: 13px; }
+  .breakdown-row span:first-child { color: var(--text-muted); }
+  .breakdown-row span:last-child { color: var(--white); font-weight: 500; }
+  .breakdown-total { border-top: 1px solid var(--dark-4); padding-top: 12px; margin-top: 4px; }
+  .breakdown-total span { font-weight: 600; color: var(--gold); font-size: 14px; }
+
+  /* SERVICES */
+  #services { background: var(--dark); }
+  .services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 24px; max-width: 1200px; margin: 0 auto; }
+  .service-card {
+    background: var(--dark-2); border: 1px solid var(--dark-4);
+    padding: 36px 28px; transition: all 0.3s; position: relative; overflow: hidden;
+  }
+  .service-card::after {
+    content:''; position: absolute; bottom: 0; left: 0; right: 0;
+    height: 2px; background: var(--gold);
+    transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
+  }
+  .service-card:hover { border-color: var(--gold-dark); transform: translateY(-3px); }
+  .service-card:hover::after { transform: scaleX(1); }
+  .service-icon { font-size: 32px; margin-bottom: 20px; }
+  .service-name { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: var(--white); font-weight: 600; margin-bottom: 12px; }
+  .service-desc { font-size: 13px; color: var(--text-dim); line-height: 1.7; }
+
+  /* TESTIMONIALS */
+  #testimonials { background: var(--dark-2); }
+  .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; max-width: 1200px; margin: 0 auto; }
+  .testimonial-card {
+    background: var(--dark-3); padding: 32px; border: 1px solid var(--dark-5); position: relative;
+  }
+  .testimonial-card::before { content: '"'; position: absolute; top: 16px; right: 24px; font-family: 'Cormorant Garamond', serif; font-size: 80px; color: rgba(201,168,76,0.1); line-height: 1; }
+  .stars { color: var(--gold); font-size: 14px; letter-spacing: 2px; margin-bottom: 16px; }
+  .testimonial-text { font-size: 14px; color: var(--text-muted); line-height: 1.8; margin-bottom: 24px; font-style: italic; }
+  .testimonial-author { display: flex; align-items: center; gap: 14px; }
+  .author-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--dark-4); border: 2px solid var(--gold-dark); display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 600; color: var(--gold); }
+  .author-name { font-size: 13px; font-weight: 500; color: var(--white); }
+  .author-car { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+
+  /* ABOUT */
+  #about { background: var(--dark); }
+  .about-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; max-width: 1200px; margin: 0 auto; }
+  .about-content .section-header { text-align: left; }
+  .about-content .gold-line { margin: 20px 0 0; }
+  .about-body { font-size: 14px; color: var(--text-muted); line-height: 1.9; margin-top: 24px; }
+  .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 40px; }
+  .about-stat { padding: 24px; background: var(--dark-2); border-left: 2px solid var(--gold); }
+  .about-stat-num { font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 600; color: var(--gold); }
+  .about-stat-label { font-size: 11px; letter-spacing: 2px; color: var(--text-dim); text-transform: uppercase; font-family: 'Barlow Condensed', sans-serif; margin-top: 4px; }
+  .about-visual {
+    position: relative; height: 500px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .about-visual-box {
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, var(--dark-3), var(--dark-4));
+    border: 1px solid var(--dark-5); position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .about-visual-box::before {
+    content:''; position: absolute; top: -50px; right: -50px;
+    width: 200px; height: 200px; border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.15);
+  }
+  .about-visual-box::after {
+    content:''; position: absolute; bottom: -80px; left: -80px;
+    width: 300px; height: 300px; border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.1);
+  }
+
+  /* CONTACT */
+  #contact { background: var(--dark-2); }
+  .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; max-width: 1100px; margin: 0 auto; }
+  .contact-info h3 { font-family: 'Cormorant Garamond', serif; font-size: 28px; color: var(--white); margin-bottom: 20px; }
+  .contact-detail { display: flex; gap: 16px; margin-bottom: 24px; align-items: flex-start; }
+  .contact-detail-icon { font-size: 18px; color: var(--gold); margin-top: 2px; flex-shrink: 0; }
+  .contact-detail-label { font-size: 10px; letter-spacing: 2px; color: var(--text-dim); text-transform: uppercase; font-family: 'Barlow Condensed', sans-serif; }
+  .contact-detail-value { font-size: 14px; color: var(--text-muted); margin-top: 3px; line-height: 1.6; }
+  .hours-grid { margin-top: 32px; }
+  .hours-grid h4 { font-size: 12px; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; font-family: 'Barlow Condensed', sans-serif; margin-bottom: 14px; }
+  .hours-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--dark-4); font-size: 13px; }
+  .hours-row span:first-child { color: var(--text-muted); }
+  .hours-row span:last-child { color: var(--white); }
+
+  .contact-form h3 { font-family: 'Cormorant Garamond', serif; font-size: 28px; color: var(--white); margin-bottom: 24px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 0; }
+  .form-group { margin-bottom: 16px; }
+  textarea.form-input { resize: vertical; min-height: 100px; }
+  .form-success {
+    display: none; background: rgba(39,174,96,0.1); border: 1px solid rgba(39,174,96,0.3);
+    color: #4dbb7f; padding: 16px; font-size: 13px; margin-top: 16px;
+  }
+  .form-success.show { display: block; }
+
+  /* MAP PLACEHOLDER */
+  .map-section { padding: 0 !important; }
+  .map-placeholder {
+    height: 300px; background: var(--dark-3);
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+    border-top: 1px solid var(--dark-4);
+  }
+  .map-grid {
+    position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(201,168,76,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(201,168,76,0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  .map-pin { position: relative; z-index: 2; text-align: center; }
+  .map-pin-icon { font-size: 40px; animation: bounce 2s ease-in-out infinite; color: var(--gold); }
+  @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+  .map-pin-label { font-size: 13px; color: var(--text-muted); margin-top: 8px; }
+  .map-pin-addr { font-size: 11px; letter-spacing: 1px; color: var(--text-dim); margin-top: 4px; }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark); padding: 64px 48px 32px;
+    border-top: 1px solid rgba(201,168,76,0.15);
+  }
+  .footer-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px;
+    margin-bottom: 48px;
+  }
+  .footer-brand-tagline { font-size: 13px; color: var(--text-dim); margin-top: 16px; line-height: 1.7; max-width: 240px; }
+  .footer-social { display: flex; gap: 12px; margin-top: 24px; }
+  .social-btn {
+    width: 36px; height: 36px; border: 1px solid var(--dark-5);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text-dim); font-size: 14px; cursor: pointer;
+    transition: all 0.2s; text-decoration: none;
+  }
+  .social-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .footer-col h4 { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 10px; }
+  .footer-col ul li a { font-size: 13px; color: var(--text-dim); text-decoration: none; transition: color 0.2s; }
+  .footer-col ul li a:hover { color: var(--text-muted); }
+  .footer-bottom {
+    border-top: 1px solid var(--dark-4); padding-top: 24px;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+  }
+  .footer-bottom p { font-size: 12px; color: var(--text-dim); }
+
+  /* BACK TO TOP */
+  .back-top {
+    position: fixed; bottom: 32px; right: 32px;
+    width: 44px; height: 44px; background: var(--gold);
+    border: none; color: var(--dark); cursor: pointer;
+    font-size: 18px; display: flex; align-items: center; justify-content: center;
+    opacity: 0; transition: opacity 0.3s; z-index: 900;
+  }
+  .back-top.visible { opacity: 1; }
+  .back-top:hover { background: var(--gold-light); }
+
+  /* TOAST */
+  .toast {
+    position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(20px);
+    background: var(--dark-3); border: 1px solid var(--gold-dark);
+    color: var(--text); padding: 14px 28px; font-size: 13px;
+    opacity: 0; transition: all 0.3s; z-index: 3000; white-space: nowrap;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* LOADING */
+  .page-loader {
+    position: fixed; inset: 0; z-index: 9999;
+    background: var(--dark); display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 24px; transition: opacity 0.6s;
+  }
+  .page-loader.hidden { opacity: 0; pointer-events: none; }
+  .loader-logo { font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 600; color: var(--gold); letter-spacing: 4px; }
+  .loader-bar { width: 200px; height: 2px; background: var(--dark-4); position: relative; overflow: hidden; }
+  .loader-bar-fill { height: 100%; background: var(--gold); animation: loadFill 1.5s ease forwards; }
+  @keyframes loadFill { from { width:0; } to { width:100%; } }
+
+  /* RESPONSIVE */
+  @media (max-width: 1024px) {
+    nav { padding: 0 28px; }
+    .nav-links, .nav-cta { display: none; }
+    .hamburger { display: flex; }
+    section { padding: 72px 28px; }
+    .hero-content { padding: 0 28px; }
+    .search-section { padding: 20px 28px; }
+    .about-inner, .contact-inner { grid-template-columns: 1fr; gap: 40px; }
+    .about-visual { height: 280px; }
+    .calc-wrapper { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .featured-inner { flex-direction: column; }
+    .featured-content, .featured-car-side { width: 100%; }
+    .featured-car-side { height: 280px; }
+    .featured-content { padding: 48px 36px; }
+  }
+  @media (max-width: 640px) {
+    .hero-car-silhouette { width: 100%; right: -10%; opacity: 0.3; }
+    .hero-content { padding: 0 20px; }
+    .hero-stats { gap: 24px; }
+    section { padding: 60px 20px; }
+    .search-section { padding: 16px 20px; }
+    .form-row { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .inventory-grid { grid-template-columns: 1fr; }
+    nav { padding: 0 20px; }
+    .features-list { grid-template-columns: 1fr; }
+    footer { padding: 48px 20px 24px; }
+    .modal-body { padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- PAGE LOADER -->
+<div class="page-loader" id="loader">
+  <div class="loader-logo">MAGMATUM</div>
+  <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- BACK TO TOP -->
+<button class="back-top" id="backTop" onclick="scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- NAVIGATION -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-mark">A</div>
+    <div>
+      <div class="nav-logo-text">MAGMATUM</div>
+      <span class="nav-logo-sub">Motors</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#inventory" class="active">Inventory</a></li>
+    <li><a href="#financing">Financing</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-cta">
+    <a href="tel:+15551234567" class="btn-outline">📞 Call Us</a>
+    <a href="#contact" class="btn-gold">Schedule Test Drive</a>
+  </div>
+  <div class="hamburger" id="hamburger" onclick="toggleMobileNav()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <a href="#inventory" onclick="toggleMobileNav()">Inventory</a>
+  <a href="#financing" onclick="toggleMobileNav()">Financing</a>
+  <a href="#services" onclick="toggleMobileNav()">Services</a>
+  <a href="#about" onclick="toggleMobileNav()">About</a>
+  <a href="#contact" onclick="toggleMobileNav()">Contact</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid-lines"></div>
+
+  <!-- SVG Car Silhouette -->
+  <svg class="hero-car-silhouette" viewBox="0 0 900 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="carGrad" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#c9a84c" stop-opacity="0.6"/>
+        <stop offset="100%" stop-color="#c9a84c" stop-opacity="0.15"/>
+      </linearGradient>
+      <linearGradient id="bodyGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#2e2e36"/>
+        <stop offset="100%" stop-color="#111113"/>
+      </linearGradient>
+      <filter id="glow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    </defs>
+    <!-- Ground reflection -->
+    <ellipse cx="450" cy="355" rx="420" ry="18" fill="rgba(201,168,76,0.06)"/>
+    <!-- Body -->
+    <path d="M80 270 Q90 220 160 190 Q220 165 300 155 Q370 148 420 142 L580 138 Q640 140 700 155 Q760 168 800 185 Q840 200 855 230 Q865 250 862 270 Z" fill="url(#bodyGrad)" stroke="url(#carGrad)" stroke-width="1.5"/>
+    <!-- Roof -->
+    <path d="M270 155 Q310 100 380 82 Q450 68 520 72 Q590 76 640 95 Q680 112 710 138 L700 155 Q640 140 580 138 L420 142 Q370 148 300 155 Z" fill="#1a1a20" stroke="rgba(201,168,76,0.4)" stroke-width="1.2"/>
+    <!-- Windshield -->
+    <path d="M300 155 Q320 108 380 87 Q440 72 500 74 Q555 76 590 100 Q620 118 650 145 L600 148 Q560 138 500 136 Q440 134 380 140 Z" fill="rgba(201,168,76,0.06)" stroke="rgba(201,168,76,0.2)" stroke-width="1"/>
+    <!-- Rear Window -->
+    <path d="M660 142 Q685 115 710 100 Q730 90 750 92 Q770 95 785 110 Q800 125 810 145 L780 150 Q760 138 730 135 Q700 132 675 145 Z" fill="rgba(201,168,76,0.06)" stroke="rgba(201,168,76,0.15)" stroke-width="1"/>
+    <!-- Side window -->
+    <path d="M380 140 L500 136 L600 148 L590 155 L380 155 Z" fill="rgba(201,168,76,0.04)" stroke="rgba(201,168,76,0.1)" stroke-width="0.5"/>
+    <!-- Door lines -->
+    <line x1="490" y1="145" x2="495" y2="270" stroke="rgba(201,168,76,0.2)" stroke-width="1"/>
+    <line x1="650" y1="148" x2="658" y2="270" stroke="rgba(201,168,76,0.15)" stroke-width="1"/>
+    <!-- Hood -->
+    <path d="M80 270 Q85 240 100 225 Q130 205 175 197 Q200 193 240 192 Q270 192 300 193 L300 155 Q240 162 185 178 Q130 196 95 230 Q82 247 80 270" fill="#161618" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
+    <!-- Front bumper -->
+    <path d="M80 270 Q76 278 76 288 Q78 300 90 304 L180 308 Q160 300 145 290 Q120 278 95 272 Z" fill="#0f0f11" stroke="rgba(201,168,76,0.2)" stroke-width="1"/>
+    <!-- Rear bumper -->
+    <path d="M855 270 Q862 278 864 290 Q862 302 848 306 L760 308 Q780 296 798 284 Q825 272 845 270 Z" fill="#0f0f11" stroke="rgba(201,168,76,0.2)" stroke-width="1"/>
+    <!-- Front Headlight -->
+    <ellipse cx="108" cy="240" rx="28" ry="14" fill="rgba(201,168,76,0.15)" stroke="rgba(201,168,76,0.5)" stroke-width="1.5"/>
+    <ellipse cx="108" cy="240" rx="16" ry="8" fill="rgba(201,168,76,0.3)" filter="url(#glow)"/>
+    <!-- Rear Taillight -->
+    <rect x="822" y="228" width="32" height="20" rx="2" fill="rgba(180,40,40,0.2)" stroke="rgba(200,50,50,0.5)" stroke-width="1.5"/>
+    <rect x="826" y="232" width="22" height="12" rx="1" fill="rgba(200,50,50,0.4)" filter="url(#glow)"/>
+    <!-- Front Wheel -->
+    <circle cx="200" cy="295" r="62" fill="#0d0d0f" stroke="rgba(201,168,76,0.35)" stroke-width="1.5"/>
+    <circle cx="200" cy="295" r="44" fill="#111115" stroke="rgba(201,168,76,0.15)" stroke-width="1"/>
+    <circle cx="200" cy="295" r="28" fill="#0a0a0c" stroke="rgba(201,168,76,0.4)" stroke-width="1.5"/>
+    <circle cx="200" cy="295" r="8" fill="var(--gold)" opacity="0.7"/>
+    <!-- Spokes -->
+    <line x1="200" y1="251" x2="200" y2="267" stroke="rgba(201,168,76,0.3)" stroke-width="2"/>
+    <line x1="200" y1="323" x2="200" y2="339" stroke="rgba(201,168,76,0.3)" stroke-width="2"/>
+    <line x1="156" y1="295" x2="172" y2="295" stroke="rgba(201,168,76,0.3)" stroke-width="2"/>
+    <line x1="228" y1="295" x2="244" y2="295" stroke="rgba(201,168,76,0.3)" stroke-width="2"/>
+    <line x1="169" y1="264" x2="180" y2="275" stroke="rgba(201,168,76,0.3)" stroke-width="2"/>
+    <line x1="220" y1="315" x2="231" y2="326" stroke="rgba(201,168,76,0.3)" stroke-width="2"/>
+    <line x1="231" y1="264" x2="220" y2="275" stroke="rgba(201,168,76,0.3)" stroke-width="2"/>
+    <line x1="180" y1="315" x2="169" y2="326" stroke="rgba(201,168,76,0.3)" stroke-width="2"/>
+    <!-- Rear Wheel -->
+    <circle cx="718" cy="295" r="62" fill="#0d0d0f" stroke="rgba(201,168,76,0.35)" stroke-width="1.5"/>
+    <circle cx="718" cy="295" r="44" fill="#111115" stroke="rgba(201,168,76,0.15)" stroke-width="1"/>
+    <circle cx="718" cy="295" r="28" fill="#0a0a0c" stroke="rgba(201,168,76,0.4)" stroke-width="1.5"/>
+    <circle cx="718" cy="295" r="8" fill="var(--gold)" opacity="0.7"/>
+    <line x1="718" y1="251" x2="718" y2="267" stroke="rgba(201,168,76,0.3)" stroke-width="2"/>
+    <line x1="718" y1="323" x2="718" y2="339" stroke="rgba(201,168,76,0.3)" stroke-width="2"/>
+    <line x1="674" y1="295" x2="690" y2="295" stroke="rgba(201,168,76,0.3)" stroke-width="2"/>
+    <line x1="746" y1="295" x2="762" y2="295" stroke="rgba(201,168,76,0.3)" stroke-width="2"/>
+    <line x1="687" y1="264" x2="698" y2="275" stroke="rgba(201,168,76,0.3)" stroke-width="2"/>
+    <line x1="738" y1="315" x2="749" y2="326" stroke="rgba(201,168,76,0.3)" stroke-width="2"/>
+    <line x1="749" y1="264" x2="738" y2="275" stroke="rgba(201,168,76,0.3)" stroke-width="2"/>
+    <line x1="698" y1="315" x2="687" y2="326" stroke="rgba(201,168,76,0.3)" stroke-width="2"/>
+    <!-- Chrome trim line -->
+    <path d="M100 238 Q200 230 400 226 Q580 222 750 232 Q810 238 840 248" stroke="url(#carGrad)" stroke-width="1.5" fill="none"/>
+    <!-- Ground shadow -->
+    <ellipse cx="460" cy="358" rx="400" ry="10" fill="rgba(0,0,0,0.4)"/>
+  </svg>
+
+  <div class="hero-car-glow"></div>
+
+  <div class="hero-content">
+    <div class="hero-label label">Premium Automotive Experience</div>
+    <h1 class="hero-title">Drive Your<br><span>Perfect</span><br>Machine</h1>
+    <p class="hero-subtitle">Where luxury meets performance. Discover our curated collection of premium vehicles — new, certified pre-owned, and exclusive imports.</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num">500+</div>
+        <div class="hero-stat-label">Vehicles</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">25yr</div>
+        <div class="hero-stat-label">Experience</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">4.9★</div>
+        <div class="hero-stat-label">Rating</div>
+      </div>
+    </div>
+    <div class="hero-actions">
+      <a href="#inventory" class="btn-gold">Browse Inventory</a>
+      <a href="#financing" class="btn-outline">Get Pre-Approved</a>
+    </div>
+  </div>
+</section>
+
+<!-- SEARCH BAR -->
+<div class="search-section">
+  <div class="search-bar">
+    <select class="search-field" id="filterMake" onchange="filterInventory()">
+      <option value="">All Makes</option>
+      <option>BMW</option><option>Mercedes-Benz</option><option>Audi</option>
+      <option>Porsche</option><option>Lexus</option><option>Tesla</option>
+      <option>Cadillac</option><option>Jaguar</option>
+    </select>
+    <select class="search-field" id="filterType" onchange="filterInventory()">
+      <option value="">All Types</option>
+      <option value="new">New</option>
+      <option value="used">Pre-Owned</option>
+      <option value="certified">Certified</option>
+    </select>
+    <select class="search-field" id="filterPrice" onchange="filterInventory()">
+      <option value="">Any Price</option>
+      <option value="50000">Under $50,000</option>
+      <option value="80000">Under $80,000</option>
+      <option value="120000">Under $120,000</option>
+    </select>
+    <select class="search-field" id="filterYear" onchange="filterInventory()">
+      <option value="">Any Year</option>
+      <option>2025</option><option>2024</option><option>2023</option><option>2022</option>
+    </select>
+    <input class="search-field" type="text" placeholder="Search model or keyword..." id="filterSearch" oninput="filterInventory()" style="flex:2">
+    <button class="search-btn" onclick="filterInventory()">Search</button>
+  </div>
+</div>
+
+<!-- INVENTORY -->
+<section id="inventory">
+  <div class="section-header">
+    <div class="label">Our Collection</div>
+    <h2 class="section-title">Browse Inventory</h2>
+    <p class="section-subtitle">Handpicked luxury and performance vehicles, each inspected and ready for you.</p>
+  </div>
+
+  <div class="filter-bar">
+    <button class="filter-pill active" onclick="setTypeFilter('all', this)">All Vehicles</button>
+    <button class="filter-pill" onclick="setTypeFilter('new', this)">New</button>
+    <button class="filter-pill" onclick="setTypeFilter('certified', this)">Certified Pre-Owned</button>
+    <button class="filter-pill" onclick="setTypeFilter('used', this)">Pre-Owned</button>
+  </div>
+
+  <div class="inventory-grid" id="inventoryGrid"></div>
+
+  <div class="inventory-footer">
+    <p style="font-size:13px;color:var(--text-dim);margin-bottom:20px;" id="inventoryCount"></p>
+    <button class="btn-outline" onclick="showToast('Loading more vehicles...')">Load More Vehicles</button>
+  </div>
+</section>
+
+<!-- CAR DETAIL MODAL -->
+<div class="modal-overlay" id="carModal" onclick="closeModal(event)">
+  <div class="modal" id="modalContent">
+    <button class="modal-close" onclick="closeModalDirect()">✕</button>
+    <div class="modal-img" id="modalImg"></div>
+    <div class="modal-body">
+      <div class="modal-header">
+        <div>
+          <div class="modal-make" id="modalMake"></div>
+          <div class="modal-title" id="modalTitle"></div>
+        </div>
+        <div>
+          <div class="modal-price" id="modalPrice"></div>
+          <div class="modal-price-sub" id="modalPriceSub"></div>
+        </div>
+      </div>
+      <div class="modal-specs-grid" id="modalSpecs"></div>
+      <div class="modal-features">
+        <h4>Standard Features</h4>
+        <div class="features-list" id="modalFeatures"></div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-gold" onclick="showToast('Test drive scheduled! We\'ll call you shortly.'); closeModalDirect()">Schedule Test Drive</button>
+        <button class="btn-outline" onclick="showToast('Connecting you with our finance team...'); closeModalDirect()">Apply for Financing</button>
+        <button class="btn-outline" onclick="showToast('Vehicle saved to your wishlist!')">♡ Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURED BANNER -->
+<div class="featured-banner">
+  <div class="featured-inner">
+    <div class="featured-content">
+      <div class="label" style="margin-bottom:14px">Vehicle of the Month</div>
+      <h2 class="featured-title">2025 Porsche Panamera Turbo S</h2>
+      <p class="featured-desc">The pinnacle of performance sedans. 630 horsepower, all-wheel drive, and a 0–60 time of 2.9 seconds. Experience the extraordinary every day.</p>
+      <div class="featured-price-tag">
+        <span class="from">Starting from</span>
+        <span class="amt">$198,500</span>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;">
+        <button class="btn-gold" onclick="openCarById(0)">View Details</button>
+        <button class="btn-outline" onclick="showToast('Booking test drive...')">Book Test Drive</button>
+      </div>
+    </div>
+    <div class="featured-car-side">
+      <div class="featured-glow"></div>
+      <svg viewBox="0 0 700 320" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:90%;max-width:560px">
+        <defs>
+          <linearGradient id="fg1" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#c9a84c" stop-opacity="0.8"/>
+            <stop offset="100%" stop-color="#c9a84c" stop-opacity="0.2"/>
+          </linearGradient>
+        </defs>
+        <path d="M60 225 Q70 180 140 155 Q200 135 280 125 L420 118 Q500 122 570 138 Q620 150 660 172 Q690 190 695 225 Z" fill="#1a1a22" stroke="url(#fg1)" stroke-width="1.5"/>
+        <path d="M240 125 Q265 80 340 65 Q400 52 460 55 Q520 58 565 78 Q605 96 640 125 L580 128 L420 122 L280 125Z" fill="#12121a" stroke="rgba(201,168,76,0.5)" stroke-width="1.2"/>
+        <path d="M280 125 Q305 90 360 72 Q420 56 480 58 Q540 60 580 80 Q605 95 630 120 L580 128 Q540 118 480 116 Q420 114 360 120 Z" fill="rgba(201,168,76,0.05)" stroke="rgba(201,168,76,0.25)" stroke-width="1"/>
+        <line x1="60" y1="225" x2="695" y2="225" stroke="rgba(201,168,76,0.15)" stroke-width="1"/>
+        <circle cx="165" cy="245" r="50" fill="#0c0c10" stroke="rgba(201,168,76,0.4)" stroke-width="1.5"/>
+        <circle cx="165" cy="245" r="34" fill="#101014" stroke="rgba(201,168,76,0.15)" stroke-width="1"/>
+        <circle cx="165" cy="245" r="20" fill="#0a0a0c" stroke="rgba(201,168,76,0.5)" stroke-width="1.5"/>
+        <circle cx="165" cy="245" r="6" fill="#c9a84c" opacity="0.8"/>
+        <line x1="165" y1="211" x2="165" y2="225" stroke="rgba(201,168,76,0.35)" stroke-width="2"/>
+        <line x1="165" y1="265" x2="165" y2="279" stroke="rgba(201,168,76,0.35)" stroke-width="2"/>
+        <line x1="131" y1="245" x2="145" y2="245" stroke="rgba(201,168,76,0.35)" stroke-width="2"/>
+        <line x1="185" y1="245" x2="199" y2="245" stroke="rgba(201,168,76,0.35)" stroke-width="2"/>
+        <circle cx="568" cy="245" r="50" fill="#0c0c10" stroke="rgba(201,168,76,0.4)" stroke-width="1.5"/>
+        <circle cx="568" cy="245" r="34" fill="#101014" stroke="rgba(201,168,76,0.15)" stroke-width="1"/>
+        <circle cx="568" cy="245" r="20" fill="#0a0a0c" stroke="rgba(201,168,76,0.5)" stroke-width="1.5"/>
+        <circle cx="568" cy="245" r="6" fill="#c9a84c" opacity="0.8"/>
+        <line x1="568" y1="211" x2="568" y2="225" stroke="rgba(201,168,76,0.35)" stroke-width="2"/>
+        <line x1="568" y1="265" x2="568" y2="279" stroke="rgba(201,168,76,0.35)" stroke-width="2"/>
+        <line x1="534" y1="245" x2="548" y2="245" stroke="rgba(201,168,76,0.35)" stroke-width="2"/>
+        <line x1="588" y1="245" x2="602" y2="245" stroke="rgba(201,168,76,0.35)" stroke-width="2"/>
+        <ellipse cx="90" cy="195" rx="22" ry="10" fill="rgba(201,168,76,0.12)" stroke="rgba(201,168,76,0.4)" stroke-width="1.5"/>
+        <ellipse cx="90" cy="195" rx="12" ry="5" fill="rgba(201,168,76,0.25)"/>
+        <rect x="640" y="185" width="28" height="16" rx="2" fill="rgba(180,40,40,0.15)" stroke="rgba(200,50,50,0.45)" stroke-width="1.5"/>
+        <path d="M80 195 Q200 188 380 184 Q520 180 640 188" stroke="url(#fg1)" stroke-width="1.5" fill="none"/>
+        <ellipse cx="378" cy="300" rx="330" ry="12" fill="rgba(0,0,0,0.35)"/>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<!-- FINANCING CALCULATOR -->
+<section id="financing">
+  <div class="section-header">
+    <div class="label">Flexible Plans</div>
+    <h2 class="section-title">Finance Calculator</h2>
+    <p class="section-subtitle">Estimate your monthly payments with our easy-to-use calculator. Get pre-approved in minutes.</p>
+  </div>
+
+  <div class="calc-wrapper">
+    <div class="calc-form">
+      <div class="form-group">
+        <label class="form-label">Vehicle Price</label>
+        <span class="range-val" id="priceDisplay">$60,000</span>
+        <input type="range" min="15000" max="250000" step="1000" value="60000" id="vehiclePrice" oninput="updateCalc()">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Down Payment</label>
+        <span class="range-val" id="downDisplay">$12,000</span>
+        <input type="range" min="0" max="100000" step="500" value="12000" id="downPayment" oninput="updateCalc()">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Loan Term</label>
+        <span class="range-val" id="termDisplay">60 months</span>
+        <input type="range" min="12" max="84" step="12" value="60" id="loanTerm" oninput="updateCalc()">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Interest Rate (APR)</label>
+        <span class="range-val" id="rateDisplay">5.9%</span>
+        <input type="range" min="1.9" max="14.9" step="0.1" value="5.9" id="interestRate" oninput="updateCalc()">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Trade-In Value</label>
+        <input type="number" class="form-input" placeholder="$0" id="tradeIn" oninput="updateCalc()">
+      </div>
+      <button class="btn-gold" style="width:100%;padding:14px;font-size:13px;" onclick="showToast('Redirecting to pre-approval form...')">Apply for Pre-Approval →</button>
+    </div>
+
+    <div class="calc-result">
+      <div class="monthly-label">Estimated Monthly Payment</div>
+      <div class="monthly-amt" id="monthlyAmt">$—</div>
+      <div class="monthly-sub">*Estimate only. Actual rates may vary based on credit score.</div>
+      <div class="calc-breakdown">
+        <div class="breakdown-row"><span>Vehicle Price</span><span id="bdPrice">—</span></div>
+        <div class="breakdown-row"><span>Down Payment</span><span id="bdDown">—</span></div>
+        <div class="breakdown-row"><span>Trade-In Credit</span><span id="bdTrade">—</span></div>
+        <div class="breakdown-row"><span>Amount Financed</span><span id="bdFinanced">—</span></div>
+        <div class="breakdown-row"><span>Loan Term</span><span id="bdTerm">—</span></div>
+        <div class="breakdown-row"><span>APR</span><span id="bdRate">—</span></div>
+        <div class="breakdown-row breakdown-total"><span>Total Cost of Loan</span><span id="bdTotal">—</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-header">
+    <div class="label">What We Offer</div>
+    <h2 class="section-title">Our Services</h2>
+    <p class="section-subtitle">Beyond the purchase — we support you every step of the ownership journey.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">🔍</div>
+      <div class="service-name">Vehicle Inspection</div>
+      <div class="service-desc">Every vehicle undergoes our comprehensive 150-point inspection by certified technicians before it reaches our showroom floor.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">💰</div>
+      <div class="service-name">Competitive Financing</div>
+      <div class="service-desc">We work with 20+ lenders to find you the best rates. Good credit, challenged credit — we have options for everyone.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🔄</div>
+      <div class="service-name">Trade-In Appraisal</div>
+      <div class="service-desc">Get a fair, no-obligation market appraisal for your current vehicle. We'll apply the value directly to your purchase.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🛡️</div>
+      <div class="service-name">Extended Warranty</div>
+      <div class="service-desc">Protect your investment with bumper-to-bumper coverage plans ranging from 1 to 5 years on all makes and models.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🔧</div>
+      <div class="service-name">Service & Maintenance</div>
+      <div class="service-desc">State-of-the-art service center with OEM-certified technicians, loaner vehicles, and transparent pricing.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🚗</div>
+      <div class="service-name">Home Delivery</div>
+      <div class="service-desc">Can't make it in? We'll bring your new vehicle directly to your home or office — fully documented and ready to drive.</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="section-header">
+    <div class="label">Customer Stories</div>
+    <h2 class="section-title">What Our Clients Say</h2>
+    <div class="gold-line"></div>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">The team at APEX Motors was absolutely exceptional. They never pressured me and found the perfect BMW M5 within my budget. Best car buying experience I've ever had.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">JR</div>
+        <div>
+          <div class="author-name">James Richardson</div>
+          <div class="author-car">2024 BMW M5 Competition</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">From the moment I walked in, I felt like a VIP. The financing process was seamless and the delivery was on time. My Porsche 911 is absolutely perfect.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">SL</div>
+        <div>
+          <div class="author-name">Sarah Langford</div>
+          <div class="author-car">2025 Porsche 911 Carrera S</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">I was skeptical about buying online, but APEX Motors made it effortless. The home delivery service is incredible. My E63 arrived spotless and on time.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">MK</div>
+        <div>
+          <div class="author-name">Michael Kovacs</div>
+          <div class="author-car">2023 Mercedes-AMG E63 S</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">The trade-in appraisal was fair and transparent. They beat every other dealer's offer by $4,000. I drove away in a gorgeous Audi RS7 the same day.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">AT</div>
+        <div>
+          <div class="author-name">Amelia Torres</div>
+          <div class="author-car">2024 Audi RS7 Sportback</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">The service center is world class. I've been bringing my Lexus here for 3 years and the honesty and quality are unmatched. Never going anywhere else.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">DC</div>
+        <div>
+          <div class="author-name">David Chen</div>
+          <div class="author-car">2022 Lexus LC 500</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">First time buying luxury and I was nervous. My advisor walked me through everything patiently. Zero pressure, completely transparent. Got a stunning Tesla Model S.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">RN</div>
+        <div>
+          <div class="author-name">Rebecca Nolan</div>
+          <div class="author-car">2025 Tesla Model S Plaid</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-inner">
+    <div class="about-content">
+      <div class="section-header" style="text-align:left">
+        <div class="label">Our Story</div>
+        <h2 class="section-title">25 Years of<br>Automotive Excellence</h2>
+        <div class="gold-line" style="margin:20px 0 0;"></div>
+      </div>
+      <p class="about-body">Founded in 1999, APEX Motors has grown from a small family dealership into one of the region's most trusted luxury automotive retailers. Our philosophy is simple: treat every customer like family, and every vehicle like art.</p>
+      <p class="about-body" style="margin-top:14px;">We carry an extensive inventory of new, certified pre-owned, and pre-owned luxury vehicles from the world's finest manufacturers — all backed by our exclusive APEX Promise.</p>
+      <div class="about-stats">
+        <div class="about-stat">
+          <div class="about-stat-num">12,000+</div>
+          <div class="about-stat-label">Happy Customers</div>
+        </div>
+        <div class="about-stat">
+          <div class="about-stat-num">500+</div>
+          <div class="about-stat-label">In Stock Now</div>
+        </div>
+        <div class="about-stat">
+          <div class="about-stat-num">20+</div>
+          <div class="about-stat-label">Lender Partners</div>
+        </div>
+        <div class="about-stat">
+          <div class="about-stat-num">#1</div>
+          <div class="about-stat-label">Regional Dealer</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-visual">
+      <div class="about-visual-box">
+        <svg viewBox="0 0 400 340" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:90%;max-width:360px">
+          <!-- Building facade -->
+          <rect x="20" y="60" width="360" height="260" fill="#161620" stroke="rgba(201,168,76,0.2)" stroke-width="1"/>
+          <!-- Roof line -->
+          <path d="M10 60 L200 20 L390 60" fill="#0f0f18" stroke="rgba(201,168,76,0.4)" stroke-width="1.5"/>
+          <text x="200" y="42" text-anchor="middle" fill="rgba(201,168,76,0.8)" font-family="Cormorant Garamond, serif" font-size="14" font-weight="600" letter-spacing="4">APEX MOTORS</text>
+          <!-- Large windows -->
+          <rect x="36" y="90" width="130" height="100" fill="rgba(201,168,76,0.04)" stroke="rgba(201,168,76,0.2)" stroke-width="1"/>
+          <rect x="50" y="100" width="102" height="80" fill="rgba(201,168,76,0.06)" stroke="rgba(201,168,76,0.1)" stroke-width="0.5"/>
+          <!-- Car in window -->
+          <ellipse cx="101" cy="157" rx="38" ry="12" fill="rgba(201,168,76,0.08)"/>
+          <path d="M68 148 Q78 135 101 131 Q124 127 135 135 Q145 142 146 148 Z" fill="rgba(201,168,76,0.15)" stroke="rgba(201,168,76,0.3)" stroke-width="0.8"/>
+          <circle cx="78" cy="154" r="8" fill="rgba(201,168,76,0.12)" stroke="rgba(201,168,76,0.3)" stroke-width="0.8"/>
+          <circle cx="130" cy="154" r="8" fill="rgba(201,168,76,0.12)" stroke="rgba(201,168,76,0.3)" stroke-width="0.8"/>
+          <!-- Right large window -->
+          <rect x="234" y="90" width="130" height="100" fill="rgba(201,168,76,0.04)" stroke="rgba(201,168,76,0.2)" stroke-width="1"/>
+          <rect x="248" y="100" width="102" height="80" fill="rgba(201,168,76,0.06)" stroke="rgba(201,168,76,0.1)" stroke-width="0.5"/>
+          <ellipse cx="299" cy="157" rx="38" ry="12" fill="rgba(201,168,76,0.08)"/>
+          <path d="M266 148 Q276 135 299 131 Q322 127 333 135 Q343 142 344 148 Z" fill="rgba(201,168,76,0.12)" stroke="rgba(201,168,76,0.25)" stroke-width="0.8"/>
+          <circle cx="276" cy="154" r="8" fill="rgba(201,168,76,0.1)" stroke="rgba(201,168,76,0.25)" stroke-width="0.8"/>
+          <circle cx="328" cy="154" r="8" fill="rgba(201,168,76,0.1)" stroke="rgba(201,168,76,0.25)" stroke-width="0.8"/>
+          <!-- Door -->
+          <rect x="160" y="230" width="80" height="90" fill="#0d0d14" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
+          <circle cx="230" cy="278" r="3" fill="rgba(201,168,76,0.6)"/>
+          <!-- Sign above door -->
+          <rect x="155" y="195" width="90" height="28" fill="var(--gold)" opacity="0.85"/>
+          <text x="200" y="212" text-anchor="middle" fill="#0a0a0b" font-family="Barlow Condensed, sans-serif" font-size="10" letter-spacing="2" font-weight="700">SHOWROOM</text>
+          <!-- Ground -->
+          <rect x="0" y="318" width="400" height="22" fill="#0a0a0c"/>
+          <line x1="0" y1="318" x2="400" y2="318" stroke="rgba(201,168,76,0.25)" stroke-width="1"/>
+          <!-- Lights -->
+          <circle cx="40" cy="90" r="4" fill="rgba(201,168,76,0.6)"/>
+          <circle cx="360" cy="90" r="4" fill="rgba(201,168,76,0.6)"/>
+          <line x1="40" y1="94" x2="40" y2="310" stroke="rgba(201,168,76,0.08)" stroke-width="0.5"/>
+          <line x1="360" y1="94" x2="360" y2="310" stroke="rgba(201,168,76,0.08)" stroke-width="0.5"/>
+          <!-- Flag / Logo on roof -->
+          <rect x="196" y="4" width="2" height="18" fill="rgba(201,168,76,0.5)"/>
+          <path d="M198 4 L212 8 L198 12 Z" fill="rgba(201,168,76,0.7)"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header">
+    <div class="label">Get In Touch</div>
+    <h2 class="section-title">Visit Our Showroom</h2>
+    <div class="gold-line"></div>
+  </div>
+  <div class="contact-inner">
+    <div class="contact-info">
+      <h3>We'd love to hear from you</h3>
+      <div class="contact-detail">
+        <div class="contact-detail-icon">📍</div>
+        <div>
+          <div class="contact-detail-label">Address</div>
+          <div class="contact-detail-value">4850 Luxury Drive, Suite 100<br>Beverly Hills, CA 90210</div>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-icon">📞</div>
+        <div>
+          <div class="contact-detail-label">Phone</div>
+          <div class="contact-detail-value">+1 (555) 123-4567<br>Sales: +1 (555) 123-4568</div>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-icon">✉️</div>
+        <div>
+          <div class="contact-detail-label">Email</div>
+          <div class="contact-detail-value">info@apexmotors.com<br>sales@apexmotors.com</div>
+        </div>
+      </div>
+      <div class="hours-grid">
+        <h4>Business Hours</h4>
+        <div class="hours-row"><span>Monday – Friday</span><span>9:00 AM – 8:00 PM</span></div>
+        <div class="hours-row"><span>Saturday</span><span>9:00 AM – 6:00 PM</span></div>
+        <div class="hours-row"><span>Sunday</span><span>11:00 AM – 5:00 PM</span></div>
+        <div class="hours-row"><span>Service Center</span><span>Mon–Sat 7:30 AM – 6:00 PM</span></div>
+      </div>
+    </div>
+    <div class="contact-form">
+      <h3>Send us a message</h3>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">First Name</label><input type="text" class="form-input" placeholder="John" id="cfirst"></div>
+        <div class="form-group"><label class="form-label">Last Name</label><input type="text" class="form-input" placeholder="Smith" id="clast"></div>
+      </div>
+      <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" placeholder="john@email.com" id="cemail"></div>
+      <div class="form-group"><label class="form-label">Phone</label><input type="tel" class="form-input" placeholder="+1 (555) 000-0000" id="cphone"></div>
+      <div class="form-group">
+        <label class="form-label">Inquiry Type</label>
+        <select class="form-input search-field">
+          <option>Sales Inquiry</option>
+          <option>Schedule Test Drive</option>
+          <option>Service Appointment</option>
+          <option>Trade-In Appraisal</option>
+          <option>Financing Question</option>
+          <option>General Question</option>
+        </select>
+      </div>
+      <div class="form-group"><label class="form-label">Message</label><textarea class="form-input" rows="4" placeholder="Tell us how we can help..." id="cmsg"></textarea></div>
+      <button class="btn-gold" style="width:100%;padding:14px;font-size:13px;" onclick="submitContact()">Send Message →</button>
+      <div class="form-success" id="formSuccess">✓ Thank you! We'll get back to you within 2 business hours.</div>
+    </div>
+  </div>
+</section>
+
+<!-- MAP -->
+<section class="map-section">
+  <div class="map-placeholder">
+    <div class="map-grid"></div>
+    <div class="map-pin">
+      <div class="map-pin-icon">📍</div>
+      <div class="map-pin-label" style="font-family:'Barlow Condensed',sans-serif;letter-spacing:2px;font-size:14px;color:var(--gold)">APEX MOTORS</div>
+      <div class="map-pin-addr">4850 Luxury Drive, Beverly Hills CA 90210</div>
+      <button class="btn-outline" style="margin-top:16px;font-size:11px;" onclick="showToast('Opening in Google Maps...')">Get Directions</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <a href="#" class="nav-logo" style="display:inline-flex">
+        <div class="nav-logo-mark">A</div>
+        <div>
+          <div class="nav-logo-text">APEX</div>
+          <span class="nav-logo-sub">Motors</span>
+        </div>
+      </a>
+      <p class="footer-brand-tagline">Premium automotive experiences since 1999. Your dream vehicle awaits at APEX Motors.</p>
+      <div class="footer-social">
+        <a class="social-btn" onclick="showToast('Facebook')">f</a>
+        <a class="social-btn" onclick="showToast('Instagram')">📸</a>
+        <a class="social-btn" onclick="showToast('Twitter/X')">𝕏</a>
+        <a class="social-btn" onclick="showToast('YouTube')">▶</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Inventory</h4>
+      <ul>
+        <li><a href="#inventory">New Vehicles</a></li>
+        <li><a href="#inventory">Pre-Owned</a></li>
+        <li><a href="#inventory">Certified Pre-Owned</a></li>
+        <li><a href="#inventory">Special Offers</a></li>
+        <li><a href="#inventory">EV Collection</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#services">Financing</a></li>
+        <li><a href="#services">Trade-In</a></li>
+        <li><a href="#services">Service Center</a></li>
+        <li><a href="#services">Extended Warranty</a></li>
+        <li><a href="#services">Home Delivery</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#" onclick="showToast('Opening careers page...')">Careers</a></li>
+        <li><a href="#" onclick="showToast('Opening privacy policy...')">Privacy Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 APEX Motors. All rights reserved. | Licensed Dealer #CA-12847</p>
+    <p>Prices exclude taxes, title & fees. All offers subject to approval.</p>
+  </div>
+</footer>
+
+<script>
+// ===== CAR DATA =====
+const cars = [
+  {
+    id: 0, make: "Porsche", model: "Panamera Turbo S", year: 2025, type: "new",
+    price: 198500, monthlyEst: 3240, mileage: 0, color: "Jet Black Metallic",
+    transmission: "8-Speed PDK", engine: "4.0L V8 Twin-Turbo", hp: 630,
+    mpg: "17/24", vin: "WP0ZZZ97ZNL100042",
+    features: ["Panoramic Roof", "Burmester Sound", "Night Vision", "Head-Up Display",
+               "Adaptive Cruise", "Heated/Cooled Seats", "Ventilated Seats", "360° Camera",
+               "Lane Keep Assist", "Sport Chrono Pkg", "Bose Surround", "Wireless CarPlay"],
+    color2: "#1a1a22"
+  },
+  {
+    id: 1, make: "BMW", model: "M5 Competition", year: 2024, type: "new",
+    price: 122400, monthlyEst: 1980, mileage: 0, color: "Frozen Black",
+    transmission: "8-Speed M Steptronic", engine: "4.4L V8 TwinPower Turbo", hp: 617,
+    mpg: "16/22", vin: "WBS83CF06PCH74923",
+    features: ["M Carbon Ceramic Brakes", "Bowers & Wilkins Audio", "Laser Headlights",
+               "M Adaptive Suspension", "Parking Assistant+", "Gesture Control",
+               "Heated Steering Wheel", "Ambient Lighting", "Apple CarPlay", "Live Cockpit Pro", "Head-Up Display", "Wireless Charging"],
+    color2: "#12121a"
+  },
+  {
+    id: 2, make: "Mercedes-Benz", model: "AMG GT 63 S", year: 2024, type: "new",
+    price: 175000, monthlyEst: 2850, mileage: 0, color: "Obsidian Black",
+    transmission: "9-Speed MCT Transmission", engine: "4.0L V8 Biturbo", hp: 630,
+    mpg: "15/21", vin: "WDD2971032A001234",
+    features: ["AMG Ride Control+", "Burmester Surround", "Driver Assistance Pkg",
+               "Night Package", "AMG Carbon Fiber Trim", "Adaptive Highbeam", "DISTRONIC PLUS",
+               "Active Parking Assist", "Wireless CarPlay", "64-Color Ambient Lighting",
+               "Heated Armrests", "Panoramic Sunroof"],
+    color2: "#0e0e15"
+  },
+  {
+    id: 3, make: "Audi", model: "RS7 Sportback", year: 2024, type: "certified",
+    price: 145800, monthlyEst: 2380, mileage: 8200, color: "Nardo Gray",
+    transmission: "8-Speed Tiptronic", engine: "4.0L V8 TFSI", hp: 591,
+    mpg: "17/25", vin: "WUAPNAFJ2MN900567",
+    features: ["Bang & Olufsen 3D", "RS Sport Suspension", "Carbon Optic Pkg",
+               "Black Optic Pkg", "Night Vision Assist", "Head-Up Display",
+               "Quattro AWD", "Active Lane Assist", "Side Assist", "Matrix LED",
+               "Massage Seats", "4-Zone Climate"],
+    color2: "#1c1c22"
+  },
+  {
+    id: 4, make: "Tesla", model: "Model S Plaid", year: 2025, type: "new",
+    price: 108990, monthlyEst: 1760, mileage: 0, color: "Midnight Cherry Red",
+    transmission: "Single-Speed Fixed Gear", engine: "Tri-Motor Electric", hp: 1020,
+    mpg: "396mi range", vin: "5YJSA1H44NF320987",
+    features: ["Autopilot", "Full Self-Driving (Supervised)", "21\" Arachnid Wheels",
+               "Premium Audio (22 Speaker)", "HEPA Air Filter", "Laser Headlights",
+               "Ventilated Front Seats", "Yoke Steering Wheel", "Wireless Gaming",
+               "17\" Rear Touchscreen", "Over-The-Air Updates", "Sentry Mode"],
+    color2: "#1a0a0a"
+  },
+  {
+    id: 5, make: "Lexus", model: "LC 500 Convertible", year: 2023, type: "certified",
+    price: 103400, monthlyEst: 1680, mileage: 14800, color: "Structural Blue",
+    transmission: "10-Speed Automatic", engine: "5.0L V8 Naturally Aspirated", hp: 471,
+    mpg: "17/27", vin: "JTHBP5AY5PA002738",
+    features: ["Mark Levinson® Audio", "LFA-Inspired Interior", "Sport+ Mode",
+               "Adaptive Variable Suspension", "Wireless Charging", "HUD",
+               "Pre-Collision System", "Heated/Cooled Seats", "Intuitive Parking Assist",
+               "Three-Piece Folding Roof", "Alcantara Trim", "Driver Assist Pkg"],
+    color2: "#0a0a18"
+  },
+  {
+    id: 6, make: "Porsche", model: "911 GT3", year: 2024, type: "new",
+    price: 216000, monthlyEst: 3520, mileage: 0, color: "Guards Red",
+    transmission: "7-Speed PDK", engine: "4.0L Flat-Six Naturally Aspirated", hp: 502,
+    mpg: "15/19", vin: "WP0AC2A96NS250189",
+    features: ["Clubsport Package", "Lift System", "Carbon Roof", "Rear-Axle Steering",
+               "Carbon Ceramic Brakes", "Sport Chrono", "Bose Soundsystem",
+               "Full Bucket Seats", "Roll Bar", "Fire Extinguisher", "Alcantara Steering", "Track Display"],
+    color2: "#1a0808"
+  },
+  {
+    id: 7, make: "Cadillac", model: "CT5-V Blackwing", year: 2024, type: "used",
+    price: 87500, monthlyEst: 1420, mileage: 6400, color: "Rift Metallic",
+    transmission: "6-Speed Manual", engine: "6.2L Supercharged V8", hp: 668,
+    mpg: "15/22", vin: "1G6DC1RW4N0130456",
+    features: ["Brembo Carbon Ceramic Brakes", "Magnetic Ride Control 4.0", "Performance Data Recorder",
+               "AKG Audio", "HUD", "Super Cruise", "Nappa Leather", "Carbon Fiber Trim",
+               "Wireless CarPlay", "Heated/Cooled Seats", "Ventilated Seats", "Night Vision"],
+    color2: "#151520"
+  },
+  {
+    id: 8, make: "Jaguar", model: "F-Type R", year: 2023, type: "used",
+    price: 89200, monthlyEst: 1450, mileage: 18300, color: "Santorini Black",
+    transmission: "8-Speed Quickshift", engine: "5.0L Supercharged V8", hp: 575,
+    mpg: "16/24", vin: "SAJWA6GL2NMK12876",
+    features: ["Meridian Sound System", "Active Exhaust", "Adaptive Dynamics",
+               "Dynamic Mode", "Configurable Suspension", "Torque Vectoring",
+               "All-Wheel Drive", "Electric Seats", "Heated Steering Wheel",
+               "Full-Color HUD", "Blind Spot Assist", "360° Parking Aid"],
+    color2: "#0e0e12"
+  }
+];
+
+let activeTypeFilter = 'all';
+
+function drawMiniCar(color = '#1a1a22') {
+  return `<svg viewBox="0 0 320 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="mg${Math.random().toString(36).substr(2,4)}" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#c9a84c" stop-opacity="0.7"/>
+        <stop offset="100%" stop-color="#c9a84c" stop-opacity="0.1"/>
+      </linearGradient>
+    </defs>
+    <rect width="320" height="160" fill="${color}"/>
+    <ellipse cx="160" cy="148" rx="150" ry="8" fill="rgba(0,0,0,0.3)"/>
+    <path d="M30 108 Q35 88 65 76 Q90 66 115 62 L200 58 Q230 60 255 70 Q280 80 295 96 Q305 108 305 120 Z" fill="#111118" stroke="rgba(201,168,76,0.4)" stroke-width="1.2"/>
+    <path d="M100 62 Q115 40 150 33 Q180 27 210 30 Q240 33 260 50 Q272 60 278 72 L255 70 L200 58 L115 62 Z" fill="#0d0d14" stroke="rgba(201,168,76,0.5)" stroke-width="1"/>
+    <path d="M115 62 Q128 44 155 36 Q180 30 205 32 Q228 35 248 50 Q262 60 270 72 L240 75 L190 66 L130 68 Z" fill="rgba(201,168,76,0.05)" stroke="rgba(201,168,76,0.2)" stroke-width="0.8"/>
+    <ellipse cx="42" cy="95" rx="10" ry="5" fill="rgba(201,168,76,0.18)" stroke="rgba(201,168,76,0.5)" stroke-width="1"/>
+    <rect x="272" y="88" width="14" height="10" rx="1" fill="rgba(180,40,40,0.2)" stroke="rgba(200,50,50,0.5)" stroke-width="1"/>
+    <circle cx="76" cy="124" r="28" fill="#0d0d10" stroke="rgba(201,168,76,0.4)" stroke-width="1.2"/>
+    <circle cx="76" cy="124" r="18" fill="#0a0a0c" stroke="rgba(201,168,76,0.5)" stroke-width="1.2"/>
+    <circle cx="76" cy="124" r="5" fill="#c9a84c" opacity="0.8"/>
+    <line x1="76" y1="106" x2="76" y2="116" stroke="rgba(201,168,76,0.4)" stroke-width="1.5"/>
+    <line x1="76" y1="132" x2="76" y2="142" stroke="rgba(201,168,76,0.4)" stroke-width="1.5"/>
+    <line x1="58" y1="124" x2="68" y2="124" stroke="rgba(201,168,76,0.4)" stroke-width="1.5"/>
+    <line x1="84" y1="124" x2="94" y2="124" stroke="rgba(201,168,76,0.4)" stroke-width="1.5"/>
+    <circle cx="248" cy="124" r="28" fill="#0d0d10" stroke="rgba(201,168,76,0.4)" stroke-width="1.2"/>
+    <circle cx="248" cy="124" r="18" fill="#0a0a0c" stroke="rgba(201,168,76,0.5)" stroke-width="1.2"/>
+    <circle cx="248" cy="124" r="5" fill="#c9a84c" opacity="0.8"/>
+    <line x1="248" y1="106" x2="248" y2="116" stroke="rgba(201,168,76,0.4)" stroke-width="1.5"/>
+    <line x1="248" y1="132" x2="248" y2="142" stroke="rgba(201,168,76,0.4)" stroke-width="1.5"/>
+    <line x1="230" y1="124" x2="240" y2="124" stroke="rgba(201,168,76,0.4)" stroke-width="1.5"/>
+    <line x1="256" y1="124" x2="266" y2="124" stroke="rgba(201,168,76,0.4)" stroke-width="1.5"/>
+    <path d="M35 96 Q100 92 180 90 Q240 89 285 94" stroke="rgba(201,168,76,0.3)" stroke-width="1" fill="none"/>
+  </svg>`;
+}
+
+function renderCard(car) {
+  const badgeClass = car.type === 'new' ? 'badge-new' : car.type === 'certified' ? 'badge-certified' : 'badge-used';
+  const badgeText = car.type === 'new' ? 'New' : car.type === 'certified' ? 'Certified' : 'Pre-Owned';
+  const miles = car.mileage > 0 ? car.mileage.toLocaleString() + ' mi' : '0 mi';
+  return `
+    <div class="car-card" onclick="openCar(${car.id})">
+      <div class="car-card-img">
+        ${drawMiniCar(car.color2)}
+        <span class="car-badge ${badgeClass}">${badgeText}</span>
+      </div>
+      <div class="car-card-body">
+        <div class="car-card-make">${car.make}</div>
+        <div class="car-card-name">${car.year} ${car.model}</div>
+        <div class="car-card-specs">
+          <span class="spec"><span class="spec-icon">⚡</span>${car.hp} hp</span>
+          <span class="spec"><span class="spec-icon">⛽</span>${car.mpg}</span>
+          <span class="spec"><span class="spec-icon">📍</span>${miles}</span>
+        </div>
+        <hr class="car-card-divider">
+        <div class="car-card-footer">
+          <div>
+            <div class="car-price">$${car.price.toLocaleString()}</div>
+            <div class="car-price-mo">~$${car.monthlyEst.toLocaleString()}/mo</div>
+          </div>
+          <button class="btn-view">View Details</button>
+        </div>
+      </div>
+    </div>`;
+}
+
+function filterInventory() {
+  const make = document.getElementById('filterMake').value;
+  const type = document.getElementById('filterType').value;
+  const maxPrice = parseFloat(document.getElementById('filterPrice').value) || Infinity;
+  const year = document.getElementById('filterYear').value;
+  const search = document.getElementById('filterSearch').value.toLowerCase();
+
+  let filtered = cars.filter(c => {
+    if (activeTypeFilter !== 'all' && c.type !== activeTypeFilter) return false;
+    if (make && c.make !== make) return false;
+    if (type && c.type !== type) return false;
+    if (c.price > maxPrice) return false;
+    if (year && c.year.toString() !== year) return false;
+    if (search && !`${c.make} ${c.model} ${c.year} ${c.color}`.toLowerCase().includes(search)) return false;
+    return true;
+  });
+
+  const grid = document.getElementById('inventoryGrid');
+  const count = document.getElementById('inventoryCount');
+  grid.innerHTML = filtered.map(renderCard).join('');
+  count.textContent = `Showing ${filtered.length} of ${cars.length} vehicles`;
+
+  if (filtered.length === 0) {
+    grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--text-dim)">
+      <div style="font-size:32px;margin-bottom:12px">🔍</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--text-muted);margin-bottom:8px">No vehicles found</div>
+      <div style="font-size:13px">Try adjusting your filters</div>
+    </div>`;
+  }
+}
+
+function setTypeFilter(type, btn) {
+  activeTypeFilter = type;
+  document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  filterInventory();
+}
+
+function openCar(id) {
+  const car = cars.find(c => c.id === id);
+  if (!car) return;
+  document.getElementById('modalImg').innerHTML = drawMiniCar(car.color2);
+  document.getElementById('modalMake').textContent = car.make;
+  document.getElementById('modalTitle').textContent = `${car.year} ${car.model}`;
+  document.getElementById('modalPrice').textContent = `$${car.price.toLocaleString()}`;
+  document.getElementById('modalPriceSub').textContent = `~$${car.monthlyEst.toLocaleString()}/month`;
+
+  const specs = [
+    { label:'Engine', val: car.engine },
+    { label:'Horsepower', val: car.hp + ' hp' },
+    { label:'Transmission', val: car.transmission },
+    { label:'Fuel Economy', val: car.mpg },
+    { label:'Mileage', val: car.mileage > 0 ? car.mileage.toLocaleString() + ' mi' : 'New' },
+    { label:'Color', val: car.color },
+    { label:'Type', val: car.type.charAt(0).toUpperCase() + car.type.slice(1) },
+    { label:'VIN', val: car.vin }
+  ];
+  document.getElementById('modalSpecs').innerHTML = specs.map(s =>
+    `<div class="modal-spec"><div class="modal-spec-label">${s.label}</div><div class="modal-spec-value">${s.val}</div></div>`
+  ).join('');
+
+  document.getElementById('modalFeatures').innerHTML = car.features.map(f =>
+    `<div class="feature-item">${f}</div>`
+  ).join('');
+
+  document.getElementById('carModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function openCarById(id) { openCar(id); }
+
+function closeModal(e) {
+  if (e.target === document.getElementById('carModal')) closeModalDirect();
+}
+
+function closeModalDirect() {
+  document.getElementById('carModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ===== FINANCING CALC =====
+function fmt(n) { return '$' + Math.round(n).toLocaleString(); }
+function updateCalc() {
+  const price = +document.getElementById('vehiclePrice').value;
+  const down = +document.getElementById('downPayment').value;
+  const term = +document.getElementById('loanTerm').value;
+  const rate = +document.getElementById('interestRate').value;
+  const trade = +document.getElementById('tradeIn').value || 0;
+
+  document.getElementById('priceDisplay').textContent = fmt(price);
+  document.getElementById('downDisplay').textContent = fmt(down);
+  document.getElementById('termDisplay').textContent = term + ' months';
+  document.getElementById('rateDisplay').textContent = rate.toFixed(1) + '%';
+
+  const financed = Math.max(0, price - down - trade);
+  const monthly = financed > 0 ? (financed * (rate/100/12)) / (1 - Math.pow(1 + rate/100/12, -term)) : 0;
+  const total = monthly * term;
+
+  document.getElementById('monthlyAmt').textContent = monthly > 0 ? fmt(monthly) : '$—';
+  document.getElementById('bdPrice').textContent = fmt(price);
+  document.getElementById('bdDown').textContent = fmt(down);
+  document.getElementById('bdTrade').textContent = fmt(trade);
+  document.getElementById('bdFinanced').textContent = fmt(financed);
+  document.getElementById('bdTerm').textContent = term + ' months';
+  document.getElementById('bdRate').textContent = rate.toFixed(1) + '%';
+  document.getElementById('bdTotal').textContent = fmt(total);
+}
+
+// ===== CONTACT FORM =====
+function submitContact() {
+  const f = document.getElementById('cfirst').value;
+  const e = document.getElementById('cemail').value;
+  if (!f || !e) { showToast('Please fill in required fields.'); return; }
+  document.getElementById('formSuccess').classList.add('show');
+  showToast('Message sent! We\'ll be in touch soon.');
+  ['cfirst','clast','cemail','cphone','cmsg'].forEach(id => document.getElementById(id).value = '');
+  setTimeout(() => document.getElementById('formSuccess').classList.remove('show'), 5000);
+}
+
+// ===== TOAST =====
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// ===== SCROLL =====
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('navbar');
+  const backTop = document.getElementById('backTop');
+  if (window.scrollY > 60) nav.classList.add('scrolled'); else nav.classList.remove('scrolled');
+  if (window.scrollY > 400) backTop.classList.add('visible'); else backTop.classList.remove('visible');
+});
+
+// ===== MOBILE NAV =====
+function toggleMobileNav() {
+  const h = document.getElementById('hamburger');
+  const m = document.getElementById('mobileNav');
+  h.classList.toggle('open');
+  m.classList.toggle('open');
+}
+
+// ===== INIT =====
+window.addEventListener('load', () => {
+  filterInventory();
+  updateCalc();
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('hidden');
+  }, 1600);
+});
+</script>
+</body>
+</html>
