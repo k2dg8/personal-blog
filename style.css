@@ -1,25 +1,18 @@
-body { font-family: sans-serif; margin: 0; background: #f4f4f4; }
-.navbar { display: flex; justify-content: space-between; padding: 1rem 10%; background: #222; color: #fff; align-items: center; }
-.nav-links { display: flex; list-style: none; }
-.nav-links li a { color: white; text-decoration: none; margin-left: 20px; }
+body { font-family: 'Segoe UI', sans-serif; background-color: #f4f7f6; padding: 20px; }
+.container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
 
-/* Auth Styling */
-.auth-page { display: flex; justify-content: center; align-items: center; height: 100vh; background: #1a1a1a; }
-.auth-container { background: white; padding: 30px; border-radius: 8px; width: 300px; text-align: center; }
-.auth-container input { width: 100%; padding: 10px; margin: 10px 0; box-sizing: border-box; }
-.auth-btn { width: 100%; padding: 10px; background: #333; color: white; border: none; cursor: pointer; }
-.auth-btn:hover { background: #00d4ff; }
+table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+th { background-color: #f8f9fa; }
 
-/* Burger Menu */
-.burger { display: none; cursor: pointer; }
-.burger div { width: 25px; height: 3px; background: white; margin: 5px; }
+/* Buttons */
+button { padding: 6px 12px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
+.btn-edit { background-color: #007bff; color: white; margin-right: 5px; }
+.btn-delete { background-color: #dc3545; color: white; }
+.btn-save { background-color: #28a745; color: white; width: 100%; margin-bottom: 10px; }
+.btn-cancel { background-color: #6c757d; color: white; width: 100%; }
 
-@media screen and (max-width: 768px) {
-    .nav-links { position: absolute; right: 0; top: 8vh; background: #222; flex-direction: column; width: 50%; display: none; }
-    .burger { display: block; }
-    .nav-active { display: flex; }
-}
-
-/* Modal */
-.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); }
-.modal-content { background: #fff; margin: 20% auto; padding: 20px; width: 300px; position: relative; }
+/* Modal Styling */
+.modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); }
+.modal-content { background: white; width: 350px; margin: 10% auto; padding: 25px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+.modal-content input { width: 100%; padding: 10px; margin: 15px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }

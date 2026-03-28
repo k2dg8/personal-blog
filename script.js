@@ -1,27 +1,49 @@
-// Initialize Firebase on Home Page
-const firebaseConfig = {
-  apiKey: "AIzaSyArSRwsubaRzp6YyH3_c7IglzGkuYXQBsU",
-  authDomain: "magmatum-7c930.firebaseapp.com",
-  projectId: "magmatum-7c930",
-  storageBucket: "magmatum-7c930.firebasestorage.app"
-};
+// 1. DELETE FUNCTION
+function deleteItem(id) {
+    if (confirm("Are you sure you want to delete project #" + id + "?")) {
+        const row = document.querySelector(`tr[data-id="${id}"]`);
+        if (row) {
+            row.style.opacity = '0'; // Optional: fade out effect
+            setTimeout(() => row.remove(), 300);
+        }
+    }
+}
 
-if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
-const db = firebase.firestore();
-const container = document.getElementById('blog-container');
+// 2. OPEN MODAL & POPULATE DATA
+function openEditModal(id) {
+    const row = document.querySelector(`tr[data-id="${id}"]`);
+    const currentName = row.querySelector('.item-name').innerText;
 
-// Pull posts from Firestore, ordered by newest first
-db.collection("posts").orderBy("timestamp", "desc").onSnapshot((snapshot) => {
-    container.innerHTML = ""; // Clear current posts
-    snapshot.forEach((doc) => {
-        const post = doc.data();
-        const article = document.createElement('article');
-        article.className = 'post';
-        article.innerHTML = `
-            <h2>${post.title}</h2>
-            <p style="color:#888; font-size:0.8rem;">${post.date}</p>
-            <p>${post.content}</p>
-        `;
-        container.appendChild(article);
-    });
-});
+    document.getElementById('editItemId').value = id;
+    document.getElementById('editItemName').value = currentName;
+    document.getElementById('editModal').style.display = "block";
+}
+
+// 3. CLOSE MODAL
+function closeModal() {
+    document.getElementById('editModal').style.display = "none";
+}
+
+// 4. SAVE CHANGES TO DOM
+function saveEdit() {
+    const id = document.getElementById('editItemId').value;
+    const newName = document.getElementById('editItemName').value;
+
+    if (newName.trim() !== "") {
+        const row = document.querySelector(`tr[data-id="${id}"]`);
+        row.querySelector('.item-name').innerText = newName;
+        
+        closeModal();
+        alert("Project " + id + " updated successfully!");
+    } else {
+        alert("Name cannot be empty.");
+    }
+}
+
+// Close modal if user clicks outside of the box
+window.onclick = function(event) {
+    const modal = document.getElementById('editModal');
+    if (event.target == modal) {
+        closeModal();
+    }
+}

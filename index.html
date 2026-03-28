@@ -3,25 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Magmatum | Home</title>
-    <link rel="stylesheet" href="./style.css">
+    <title>Magmatum Dashboard</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="logo">Magmatum</div>
-        <ul class="nav-links" id="navLinks">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="login.html">Login</a></li>
-            <li><a href="signup.html">Sign Up</a></li>
-            <li><a href="#" id="contactLink">Contact</a></li>
-        </ul>
-        <div class="burger" id="burger">
-            <div class="line1"></div><div class="line2"></div><div class="line3"></div>
+
+    <div class="container">
+        <h2>Project Management Dashboard</h2>
+        
+        <table id="projectTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Project Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-id="101">
+                    <td>101</td>
+                    <td class="item-name">LogicLoom Alpha</td>
+                    <td>
+                        <button class="btn-edit" onclick="openEditModal(101)">Edit</button>
+                        <button class="btn-delete" onclick="deleteItem(101)">Delete</button>
+                    </td>
+                </tr>
+                <tr data-id="102">
+                    <td>102</td>
+                    <td class="item-name">CyberOps Monitor</td>
+                    <td>
+                        <button class="btn-edit" onclick="openEditModal(102)">Edit</button>
+                        <button class="btn-delete" onclick="deleteItem(102)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <h3>Update Project</h3>
+            <hr>
+            <input type="hidden" id="editItemId">
+            <label for="editItemName">Project Name</label>
+            <input type="text" id="editItemName">
+            
+            <div class="modal-actions">
+                <button onclick="saveEdit()" class="btn-save">Save Changes</button>
+                <button onclick="closeModal()" class="btn-cancel">Cancel</button>
+            </div>
         </div>
-    </nav>
+    </div>
 
-    <main id="blog-container"></main>
-
-    <script src="./script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
