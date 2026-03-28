@@ -3,54 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Magmatum Dashboard</title>
+    <title>Magmatum | Tech & Logic</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="container">
-        <h2>Project Management Dashboard</h2>
-        
-        <table id="projectTable">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Project Name</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr data-id="101">
-                    <td>101</td>
-                    <td class="item-name">LogicLoom Alpha</td>
-                    <td>
-                        <button class="btn-edit" onclick="openEditModal(101)">Edit</button>
-                        <button class="btn-delete" onclick="deleteItem(101)">Delete</button>
-                    </td>
-                </tr>
-                <tr data-id="102">
-                    <td>102</td>
-                    <td class="item-name">CyberOps Monitor</td>
-                    <td>
-                        <button class="btn-edit" onclick="openEditModal(102)">Edit</button>
-                        <button class="btn-delete" onclick="deleteItem(102)">Delete</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <nav class="navbar">
+        <div class="logo">MAGMATUM</div>
+        <ul class="nav-links">
+            <li><a href="#" onclick="showSection('homeSection')">Home</a></li>
+            <li id="adminLink" style="display:none;"><a href="#" onclick="showSection('adminSection')">Admin Panel</a></li>
+            <li><button class="btn-login" id="authBtn" onclick="showSection('loginSection')">Login</button></li>
+        </ul>
+    </nav>
 
-    <div id="editModal" class="modal">
-        <div class="modal-content">
-            <h3>Update Project</h3>
-            <hr>
-            <input type="hidden" id="editItemId">
-            <label for="editItemName">Project Name</label>
-            <input type="text" id="editItemName">
-            
-            <div class="modal-actions">
-                <button onclick="saveEdit()" class="btn-save">Save Changes</button>
-                <button onclick="closeModal()" class="btn-cancel">Cancel</button>
+    <section id="homeSection" class="page-section">
+        <div class="hero">
+            <h1>Explore the Logic Loom</h1>
+            <p>Latest insights into Backend Development & Cybersecurity.</p>
+        </div>
+        <div class="container">
+            <h2>Recent Posts</h2>
+            <div id="postsContainer" class="posts-grid">
+                </div>
+        </div>
+    </section>
+
+    <section id="loginSection" class="page-section" style="display:none;">
+        <div class="auth-card">
+            <h2 id="authTitle">Login</h2>
+            <input type="email" id="email" placeholder="Email">
+            <input type="password" id="password" placeholder="Password">
+            <button class="btn-save" onclick="handleAuth()">Submit</button>
+            <p onclick="toggleAuthMode()" id="authToggleText">Don't have an account? Sign Up</p>
+        </div>
+    </section>
+
+    <section id="adminSection" class="page-section" style="display:none;">
+        <div class="container">
+            <div class="table-header">
+                <h2>Admin Control Panel</h2>
+                <button class="btn-add" onclick="openPostModal()">+ Create New Post</button>
+            </div>
+            <table id="adminTable">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="adminTableBody">
+                    </tbody>
+            </table>
+        </div>
+    </section>
+
+    <div id="postModal" class="modal-overlay">
+        <div class="modal-box">
+            <h3 id="modalTitle">New Post</h3>
+            <input type="hidden" id="editPostId">
+            <input type="text" id="postTitleInput" placeholder="Post Title">
+            <textarea id="postContentInput" placeholder="Post content..."></textarea>
+            <div class="modal-footer">
+                <button class="btn-save" onclick="savePost()">Publish</button>
+                <button class="btn-cancel" onclick="closeModal()">Cancel</button>
             </div>
         </div>
     </div>
